@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 4 sp1 (x64) (http://www.altova.com) by Dzmitry Brukhanchyk (NoCompany) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<!--Базоые типы данных-->
+	<xs:simpleType name="dateType">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="numberType">
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="realType">
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="stringType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 4 sp1 (x64) (http://www.altova.com) by Dzmitry Brukhanchyk (NoCompany) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:include schemaLocation="basetypes.xsd"/>
+	<xs:include schemaLocation="objecttypes.xsd"/>
+	<xs:complexType name="requestType100">
+		<xs:complexContent>
+			<xs:extension base="requestHeader">
+				<xs:sequence>
+					<xs:element name="body" type="operation"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="request" type="requestType100"/>
+</xs:schema>
