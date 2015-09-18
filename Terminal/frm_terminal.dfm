@@ -67,7 +67,7 @@ object TerminalForm: TTerminalForm
     Top = 367
     Width = 75
     Height = 25
-    Caption = 'Packet Mode'
+    Caption = #1040#1074#1090#1086'-'#1088#1077#1078#1080#1084
     TabOrder = 1
   end
   object edPan: TEdit
@@ -124,6 +124,14 @@ object TerminalForm: TTerminalForm
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+  end
+  object btGenerate: TButton
+    Left = 372
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = #1043#1077#1085#1077#1088#1072#1094#1080#1103
+    TabOrder = 9
   end
   object dsTermOpers: TDataSource
     Left = 224

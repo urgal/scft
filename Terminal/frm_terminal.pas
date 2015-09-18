@@ -24,6 +24,7 @@ type
     edShiftID: TEdit;
     dbTermOpers: TDBGrid;
     dsTermOpers: TDataSource;
+    btGenerate: TButton;
   private
     { Private declarations }
   public
