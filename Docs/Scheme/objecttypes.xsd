@@ -12,6 +12,16 @@
 		<xs:attribute name="date" type="dateType" use="required"/>
 		<xs:attribute name="poslun" type="stringType" use="required"/>
 	</xs:complexType>
+	<xs:complexType name="operation">
+		<xs:annotation>
+			<xs:documentation>Описание структуры запроса авторизации операции</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="code" type="stringType" use="required"/>
+		<xs:attribute name="PAN" type="stringType" use="required"/>
+		<xs:attribute name="currency" type="numberType" use="required"/>
+		<xs:attribute name="amount" type="realType" use="required"/>
+		<xs:attribute name="PINblock" type="stringType"/>
+	</xs:complexType>
 	<xs:complexType name="requestHeader">
 		<xs:annotation>
 			<xs:documentation>Заголовок запроса</xs:documentation>
@@ -37,15 +47,5 @@
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="operation">
-		<xs:annotation>
-			<xs:documentation>Описание структуры запроса авторизации операции</xs:documentation>
-		</xs:annotation>
-		<xs:attribute name="code" type="stringType" use="required"/>
-		<xs:attribute name="PAN" type="stringType" use="required"/>
-		<xs:attribute name="currency" type="numberType" use="required"/>
-		<xs:attribute name="amount" type="realType" use="required"/>
-		<xs:attribute name="PINblock" type="stringType"/>
 	</xs:complexType>
 </xs:schema>

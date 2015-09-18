@@ -3,22 +3,18 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:include schemaLocation="basetypes.xsd"/>
 	<xs:include schemaLocation="objecttypes.xsd"/>
-	<xs:complexType name="responseType100">
+	<xs:complexType name="responseType199">
 		<xs:complexContent>
 			<xs:extension base="responseHeader">
 				<xs:sequence>
 					<xs:element name="body">
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="operation" type="operation"/>
-							</xs:sequence>
-							<xs:attribute name="responseCode" type="stringType" use="required"/>
-							<xs:attribute name="authorizationCode" type="stringType"/>
+							<xs:attribute name="code" type="stringType" use="required"/>
 						</xs:complexType>
 					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:element name="response" type="responseType100"/>
+	<xs:element name="response" type="responseType199"/>
 </xs:schema>

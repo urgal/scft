@@ -8,7 +8,11 @@
 		<File FilePath="basetypes.xsd" HomeFolder="Yes"/>
 		<File FilePath="objecttypes.xsd" HomeFolder="Yes"/>
 		<File FilePath="request100.xsd" HomeFolder="Yes"/>
+		<File FilePath="request198.xsd" HomeFolder="Yes"/>
+		<File FilePath="request199.xsd" HomeFolder="Yes"/>
 		<File FilePath="response100.xsd" HomeFolder="Yes"/>
+		<File FilePath="response198.xsd" HomeFolder="Yes"/>
+		<File FilePath="response199.xsd" HomeFolder="Yes"/>
 	</Folder>
 	<Folder FolderName="Entities" ExtStr="ent"/>
 </Project>
