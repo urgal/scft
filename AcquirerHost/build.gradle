@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'ch.qos.logback:logback-core:1.1+'
+    compile 'ch.qos.logback:logback-access:1.1+'
+    compile 'ch.qos.logback:logback-classic:1.1+'
+    compile 'org.codehaus.groovy:groovy:2.4+'
+    compile 'org.springframework:spring-core:4.2+'
+    compile 'org.springframework:spring-webmvc:4.2+'
+    compile 'org.springframework:spring-context:4.2+'
+
+    testCompile 'junit:junit:4.12'
+}
+
+gretty {
+    contextPath '/'
+    logbackConfigFile "$projectDir/src/main/resources/logback.groovy"
+}
