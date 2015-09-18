@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 4 sp1 (x64) (http://www.altova.com) by Dzmitry Brukhanchyk (NoCompany) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<!--Базовые объекты-->
+	<xs:include schemaLocation="basetypes.xsd"/>
+	<xs:complexType name="messageHeader">
+		<xs:annotation>
+			<xs:documentation>Общая часть заголовков сообщений</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="type" type="stringType" use="required"/>
+		<xs:attribute name="number" type="numberType" use="required"/>
+		<xs:attribute name="date" type="dateType" use="required"/>
+		<xs:attribute name="poslun" type="stringType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="requestHeader">
+		<xs:annotation>
+			<xs:documentation>Заголовок запроса</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="messageHeader"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="responseHeader">
+		<xs:annotation>
+			<xs:documentation>Заголовок ответа</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="requestHeader">
+				<xs:sequence>
+					<xs:element name="answer">
+						<xs:complexType>
+							<xs:attribute name="code" type="stringType" use="required"/>
+							<xs:attribute name="number" type="numberType" use="required"/>
+							<xs:attribute name="date" type="dateType" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="operation">
+		<xs:annotation>
+			<xs:documentation>Описание структуры запроса авторизации операции</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="code" type="stringType" use="required"/>
+		<xs:attribute name="PAN" type="stringType" use="required"/>
+		<xs:attribute name="currency" type="numberType" use="required"/>
+		<xs:attribute name="amount" type="realType" use="required"/>
+		<xs:attribute name="PINblock" type="stringType"/>
+	</xs:complexType>
+</xs:schema>
