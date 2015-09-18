@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, StdCtrls;
+  Dialogs, Grids, DBGrids, StdCtrls, DB;
 
 type
   TTerminalForm = class(TForm)
@@ -23,6 +23,7 @@ type
     lbOperType: TLabel;
     edShiftID: TEdit;
     dbTermOpers: TDBGrid;
+    dsTermOpers: TDataSource;
   private
     { Private declarations }
   public

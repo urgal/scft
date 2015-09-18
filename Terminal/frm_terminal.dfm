@@ -125,4 +125,8 @@ object TerminalForm: TTerminalForm
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
+  object dsTermOpers: TDataSource
+    Left = 224
+    Top = 208
+  end
 end
