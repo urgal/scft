@@ -4,10 +4,25 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs;
+  Dialogs, Grids, DBGrids, StdCtrls;
 
 type
   TTerminalForm = class(TForm)
+    edTermID: TEdit;
+    btPacketMode: TButton;
+    edPan: TEdit;
+    edCurrency: TEdit;
+    edAmount: TEdit;
+    btSend: TButton;
+    cbOperType: TComboBox;
+    lbTermID: TLabel;
+    lbShiftID: TLabel;
+    lbPAN: TLabel;
+    lbCurrency: TLabel;
+    lbAmount: TLabel;
+    lbOperType: TLabel;
+    edShiftID: TEdit;
+    dbTermOpers: TDBGrid;
   private
     { Private declarations }
   public
