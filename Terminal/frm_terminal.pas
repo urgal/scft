@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, StdCtrls, DB;
+  Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools;
 
 type
   TTerminalForm = class(TForm)
@@ -25,6 +25,7 @@ type
     dbTermOpers: TDBGrid;
     dsTermOpers: TDataSource;
     btGenerate: TButton;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,5 +38,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TTerminalForm.FormCreate(Sender: TObject);
+begin
+  edTermID.Text := IntToStr(GenerateTerminalID);
+end;
 
 end.
