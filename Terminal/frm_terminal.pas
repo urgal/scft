@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools, IPPeerClient,
-  REST.Client, Data.Bind.Components, Data.Bind.ObjectScope;
+  REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
   TTerminalForm = class(TForm)
@@ -34,6 +34,7 @@ type
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
     procedure btSendClick(Sender: TObject);
+    procedure CreateXMLFile;
   private
     { Private declarations }
   public
@@ -87,8 +88,10 @@ var
   vPageName : string;
 begin
   rstClient.BaseURL := 'http://10.168.1.236:8080/rest/authorizeTransaction?transactionToken=dsalghsdgc';
+  CreateXMLFile;
   //rstReq.Timeout := 5000;
   try //отправка сообщения
+    //rstReq.Method := rmGET;
     rstReq.Execute;
   except
     on E:Exception do
@@ -109,6 +112,11 @@ begin
   edTermID.Text := IntToStr(GenerateTerminalID);
   list := cbOperType.Items;
   InitOperationList(list);
+end;
+
+procedure TTerminalForm.CreateXMLFile;
+begin //создание xml-файла запроса
+//
 end;
 
 end.
