@@ -105,6 +105,7 @@ object TerminalForm: TTerminalForm
     Caption = #1054#1090#1087#1088#1072#1074#1082#1072
     Enabled = False
     TabOrder = 5
+    OnClick = btSendClick
   end
   object cbOperType: TComboBox
     Left = 190
@@ -122,18 +123,6 @@ object TerminalForm: TTerminalForm
     Enabled = False
     TabOrder = 7
   end
-  object dbTermOpers: TDBGrid
-    Left = 8
-    Top = 264
-    Width = 439
-    Height = 149
-    TabOrder = 8
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-  end
   object btGenerate: TButton
     Left = 112
     Top = 225
@@ -141,7 +130,7 @@ object TerminalForm: TTerminalForm
     Height = 25
     Caption = #1043#1077#1085#1077#1088#1072#1094#1080#1103
     Enabled = False
-    TabOrder = 9
+    TabOrder = 8
     OnClick = btGenerateClick
   end
   object btOpenShift: TButton
@@ -150,8 +139,20 @@ object TerminalForm: TTerminalForm
     Width = 223
     Height = 25
     Caption = #1054#1090#1082#1088#1099#1090#1100' '#1089#1084#1077#1085#1091
-    TabOrder = 10
+    TabOrder = 9
     OnClick = btOpenShiftClick
+  end
+  object dbTermOpers: TDBGrid
+    Left = 8
+    Top = 264
+    Width = 439
+    Height = 149
+    TabOrder = 10
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
   object dsTermOpers: TDataSource
     Left = 384

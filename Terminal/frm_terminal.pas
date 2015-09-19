@@ -22,15 +22,18 @@ type
     lbAmount: TLabel;
     lbOperType: TLabel;
     edShiftID: TEdit;
-    dbTermOpers: TDBGrid;
     dsTermOpers: TDataSource;
     btGenerate: TButton;
     btOpenShift: TButton;
+    dbTermOpers: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
+    procedure btSendClick(Sender: TObject);
   private
-    { Private declarations }
+    FCurrentTerminalID : integer;
+    FCurrentShiftID : integer;
+    FGenerateFields : TOperationFields;
   public
     { Public declarations }
   end;
@@ -47,17 +50,11 @@ var
   curr : integer;
   operType : integer;
 begin
-  operType := GenerateOperationType;
-  cbOperType.ItemIndex := operType-1;
-  edAmount.Text := '';
-  case operType of
-    OPERATION_PAY, OPERATION_GET_CASH : begin
-      edAmount.Text := FloatToStr(GenerateOperationSum(curr));
-    end;
-  end;
-  curr := GenerateOperationCurrency;
-  edCurrency.Text := IntToStr(curr);
-  edPan.Text := IntToStr(GenerateOperationCardPAN);
+  GenerateOperationFields(FCurrentTerminalID, FCurrentShiftID, FGenerateFields);
+  cbOperType.ItemIndex := FGenerateFields.operationType-1;
+  edAmount.Text := FloatToStr(FGenerateFields.sum);
+  edCurrency.Text := IntToStr(FGenerateFields.currency);
+  edPan.Text := IntToStr(FGenerateFields.pan);
 end;
 
 procedure TTerminalForm.btOpenShiftClick(Sender: TObject);
@@ -69,12 +66,32 @@ begin
   case btOpenShift.Tag of
     0 :  begin
       btOpenShift.Caption := 'Открыть смену';
+      edShiftID.Text := '';
+      CloseTerminalShift(FCurrentShiftID);
     end;
     1 : begin
       btOpenShift.Caption := 'Закрыть смену';
+      try
+        FCurrentShiftID := OpenTerminalShift(FCurrentTerminalID);
+      except
+        on E : Exception do begin
+          ShowMessage(E.Message);
+        end;
+      end;
+      edShiftID.Text := IntToStr(FCurrentShiftID);
     end;
   end;
-  edShiftID.Text := IntToStr(OpenTerminalShift);
+end;
+
+procedure TTerminalForm.btSendClick(Sender: TObject);
+begin
+  try
+    LogOperationFields(FGenerateFields);
+  except
+    on E : Exception do begin
+      ShowMessage(E.Message);
+    end;
+  end;
 end;
 
 procedure TTerminalForm.FormCreate(Sender: TObject);
@@ -91,7 +108,8 @@ begin
       Application.Terminate;
     end;
   end;
-  edTermID.Text := IntToStr(GenerateTerminalID);
+  FCurrentTerminalID := GenerateTerminalID;
+  edTermID.Text := IntToStr(FCurrentTerminalID);
   list := cbOperType.Items;
   InitOperationList(list);
 end;
