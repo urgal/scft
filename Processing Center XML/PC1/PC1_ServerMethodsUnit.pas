@@ -38,7 +38,9 @@ var
 begin
   vLogId := ParseXML100(aXML);
   GetResponse100(vLogId);
-  Result := GetResponse100(vLogId);
+  Result := StringReplace(GetResponse100(vLogId),'"','/"',
+                          [rfReplaceAll, rfIgnoreCase])
+//result := 'test';
 end;
 
 function TServerMethods1.EchoString(Value: string): string;
