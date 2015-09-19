@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools;
+  Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools, IPPeerClient,
+  REST.Client, Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
   TTerminalForm = class(TForm)
@@ -26,9 +27,13 @@ type
     dsTermOpers: TDataSource;
     btGenerate: TButton;
     btOpenShift: TButton;
+    rstClient: TRESTClient;
+    rstReq: TRESTRequest;
+    rstResp: TRESTResponse;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
+    procedure btSendClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,6 +80,25 @@ begin
     end;
   end;
   edShiftID.Text := IntToStr(OpenTerminalShift);
+end;
+
+procedure TTerminalForm.btSendClick(Sender: TObject);
+var
+  vPageName : string;
+begin
+  rstClient.BaseURL := 'http://10.168.1.236:8080/rest/authorizeTransaction?transactionToken=dsalghsdgc';
+  //rstReq.Timeout := 5000;
+  try //отправка сообщения
+    rstReq.Execute;
+  except
+    on E:Exception do
+      ShowMessage(E.Message);
+  end;
+  if Assigned(rstResp.JSONValue) then
+  begin  //обработка ответа
+    rstResp.GetSimpleValue('title', vPageName);
+    ShowMessage(vPageName);
+  end;
 end;
 
 procedure TTerminalForm.FormCreate(Sender: TObject);
