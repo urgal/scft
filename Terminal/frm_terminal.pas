@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools;
+  Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools, Data.Win.ADODB, terminal_db;
 
 type
   TTerminalForm = class(TForm)
@@ -80,8 +80,17 @@ end;
 procedure TTerminalForm.FormCreate(Sender: TObject);
 var
   list : TStrings;
+  wstr : PWideChar;
 begin
   randomize;
+  try
+    ConnectToDataBase;
+  except
+    on E : Exception do begin
+      ShowMessage(E.Message);
+      Application.Terminate;
+    end;
+  end;
   edTermID.Text := IntToStr(GenerateTerminalID);
   list := cbOperType.Items;
   InitOperationList(list);
