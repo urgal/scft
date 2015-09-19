@@ -25,7 +25,10 @@ type
     dbTermOpers: TDBGrid;
     dsTermOpers: TDataSource;
     btGenerate: TButton;
+    btOpenShift: TButton;
     procedure FormCreate(Sender: TObject);
+    procedure btOpenShiftClick(Sender: TObject);
+    procedure btGenerateClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,9 +42,49 @@ implementation
 
 {$R *.dfm}
 
-procedure TTerminalForm.FormCreate(Sender: TObject);
+procedure TTerminalForm.btGenerateClick(Sender: TObject);
+var
+  curr : integer;
+  operType : integer;
 begin
+  operType := GenerateOperationType;
+  cbOperType.ItemIndex := operType-1;
+  edAmount.Text := '';
+  case operType of
+    OPERATION_PAY, OPERATION_GET_CASH : begin
+      edAmount.Text := FloatToStr(GenerateOperationSum(curr));
+    end;
+  end;
+  curr := GenerateOperationCurrency;
+  edCurrency.Text := IntToStr(curr);
+  edPan.Text := IntToStr(GenerateOperationCardPAN);
+end;
+
+procedure TTerminalForm.btOpenShiftClick(Sender: TObject);
+begin
+  btOpenShift.Tag := (btOpenShift.Tag + 1) mod 2;
+  btGenerate.Enabled := (btOpenShift.Tag = 1);
+  btSend.Enabled := (btOpenShift.Tag = 1);
+  btPacketMode.Enabled := (btOpenShift.Tag = 1);
+  case btOpenShift.Tag of
+    0 :  begin
+      btOpenShift.Caption := 'Открыть смену';
+    end;
+    1 : begin
+      btOpenShift.Caption := 'Закрыть смену';
+    end;
+  end;
+  edShiftID.Text := IntToStr(OpenTerminalShift);
+end;
+
+procedure TTerminalForm.FormCreate(Sender: TObject);
+var
+  list : TStrings;
+begin
+  randomize;
   edTermID.Text := IntToStr(GenerateTerminalID);
+  list := cbOperType.Items;
+  InitOperationList(list);
 end;
 
 end.
