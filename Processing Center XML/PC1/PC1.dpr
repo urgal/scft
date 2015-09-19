@@ -7,10 +7,10 @@ uses
   Vcl.Forms,
   Web.WebReq,
   IdHTTPWebBrokerBridge,
-  FormUnit1 in 'FormUnit1.pas' {Form1},
-  ServerMethodsUnit1 in 'ServerMethodsUnit1.pas',
-  ServerContainerUnit1 in 'ServerContainerUnit1.pas' {ServerContainer1: TDataModule},
-  WebModuleUnit1 in 'WebModuleUnit1.pas' {WebModule1: TWebModule};
+  PC1_FormUnit in 'PC1_FormUnit.pas' {Form1},
+  PC1_ServerMethodsUnit in 'PC1_ServerMethodsUnit.pas',
+  PC1_ServerContainerUnit in 'PC1_ServerContainerUnit.pas' {ServerContainer1: TDataModule},
+  PC1_WebModuleUnit in 'PC1_WebModuleUnit.pas' {WebModule1: TWebModule};
 
 {$R *.res}
 

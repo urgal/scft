@@ -23,7 +23,7 @@ function DSServer: TDSServer;
 
 implementation
 
-uses Winapi.Windows, ServerMethodsUnit1;
+uses Winapi.Windows, PC1_ServerMethodsUnit;
 
 {$R *.dfm}
 
@@ -51,7 +51,7 @@ end;
 procedure TServerContainer1.DSServerClass1GetClass(
   DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ServerMethodsUnit1.TServerMethods1;
+  PersistentClass := PC1_ServerMethodsUnit.TServerMethods1;
 end;
 
 

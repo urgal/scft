@@ -43,7 +43,7 @@ var
 
 implementation
 
-uses ServerMethodsUnit1, ServerContainerUnit1, Web.WebReq;
+uses PC1_ServerMethodsUnit, PC1_ServerContainerUnit, Web.WebReq;
 
 {$R *.dfm}
 
@@ -59,7 +59,7 @@ begin
   else if SameText(TagString, 'host') then
     ReplaceText := string(Request.Host)
   else if SameText(TagString, 'classname') then
-    ReplaceText := ServerMethodsUnit1.TServerMethods1.ClassName
+    ReplaceText := PC1_ServerMethodsUnit.TServerMethods1.ClassName
   else if SameText(TagString, 'loginrequired') then
     if DSHTTPWebDispatcher1.AuthenticationManager <> nil then
       ReplaceText := 'true'

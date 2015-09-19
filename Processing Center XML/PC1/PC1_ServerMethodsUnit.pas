@@ -19,7 +19,7 @@ type
 implementation
 
 
-uses System.StrUtils, FormUnit1;
+uses System.StrUtils, PC1_FormUnit;
 
 
 
