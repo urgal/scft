@@ -4,13 +4,27 @@
 	<xs:include schemaLocation="basetypes.xsd"/>
 	<xs:include schemaLocation="objecttypes.xsd"/>
 	<xs:complexType name="responseType198">
+		<xs:annotation>
+			<xs:documentation>Ответ на запрос начала работы точки. Открытия смены (пачки)</xs:documentation>
+		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="responseHeader">
 				<xs:sequence>
 					<xs:element name="body">
+						<xs:annotation>
+							<xs:documentation>Тело ответа</xs:documentation>
+						</xs:annotation>
 						<xs:complexType>
-							<xs:attribute name="code" type="stringType" use="required"/>
-							<xs:attribute name="publicKey" type="stringType"/>
+							<xs:attribute name="code" type="stringType" use="required">
+								<xs:annotation>
+									<xs:documentation>Код ответа хоста</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="publicKey" type="stringType">
+								<xs:annotation>
+									<xs:documentation>Открытй ключ для шифрования ПИН-блока</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
 						</xs:complexType>
 					</xs:element>
 				</xs:sequence>

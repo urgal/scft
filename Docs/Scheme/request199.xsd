@@ -4,6 +4,9 @@
 	<xs:include schemaLocation="basetypes.xsd"/>
 	<xs:include schemaLocation="objecttypes.xsd"/>
 	<xs:complexType name="requestType199">
+		<xs:annotation>
+			<xs:documentation>Запрос на закрытие смены (пачки)</xs:documentation>
+		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="requestHeader"/>
 		</xs:complexContent>

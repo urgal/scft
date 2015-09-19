@@ -7,21 +7,61 @@
 		<xs:annotation>
 			<xs:documentation>Общая часть заголовков сообщений</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="type" type="stringType" use="required"/>
-		<xs:attribute name="number" type="numberType" use="required"/>
-		<xs:attribute name="date" type="dateType" use="required"/>
-		<xs:attribute name="poslun" type="stringType" use="required"/>
-		<xs:attribute name="batch" type="numberType" use="required"/>
+		<xs:attribute name="type" type="stringType" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип сообщения</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="number" type="numberType" use="required">
+			<xs:annotation>
+				<xs:documentation>Уникальный номер сообщения</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="date" type="dateType" use="required">
+			<xs:annotation>
+				<xs:documentation>Дата формирования сообщения</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="poslun" type="stringType" use="required">
+			<xs:annotation>
+				<xs:documentation>Идентификатор точки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="batch" type="numberType" use="required">
+			<xs:annotation>
+				<xs:documentation>Идентификатор смены (пачки)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="operation">
 		<xs:annotation>
 			<xs:documentation>Описание структуры запроса авторизации операции</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="code" type="stringType" use="required"/>
-		<xs:attribute name="PAN" type="stringType" use="required"/>
-		<xs:attribute name="currency" type="numberType" use="required"/>
-		<xs:attribute name="amount" type="realType" use="required"/>
-		<xs:attribute name="PINblock" type="stringType"/>
+		<xs:attribute name="code" type="stringType" use="required">
+			<xs:annotation>
+				<xs:documentation>Код операции</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PAN" type="stringType" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер карточки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="currency" type="numberType" use="required">
+			<xs:annotation>
+				<xs:documentation>Валюта операции</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="amount" type="realType" use="required">
+			<xs:annotation>
+				<xs:documentation>Сумма операции</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PINblock" type="stringType">
+			<xs:annotation>
+				<xs:documentation>ПИН-блок</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="requestHeader">
 		<xs:annotation>
@@ -39,10 +79,25 @@
 			<xs:extension base="requestHeader">
 				<xs:sequence>
 					<xs:element name="answer">
+						<xs:annotation>
+							<xs:documentation>Ответ хоста</xs:documentation>
+						</xs:annotation>
 						<xs:complexType>
-							<xs:attribute name="code" type="stringType" use="required"/>
-							<xs:attribute name="number" type="numberType" use="required"/>
-							<xs:attribute name="date" type="dateType" use="required"/>
+							<xs:attribute name="code" type="stringType" use="required">
+								<xs:annotation>
+									<xs:documentation>Код статуса</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="number" type="numberType" use="required">
+								<xs:annotation>
+									<xs:documentation>Порядковый номер</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="date" type="dateType" use="required">
+								<xs:annotation>
+									<xs:documentation>Дата формирования</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
 						</xs:complexType>
 					</xs:element>
 				</xs:sequence>

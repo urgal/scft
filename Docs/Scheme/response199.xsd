@@ -4,12 +4,22 @@
 	<xs:include schemaLocation="basetypes.xsd"/>
 	<xs:include schemaLocation="objecttypes.xsd"/>
 	<xs:complexType name="responseType199">
+		<xs:annotation>
+			<xs:documentation>Ответ на запрос закрытия смены (пачки)</xs:documentation>
+		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="responseHeader">
 				<xs:sequence>
 					<xs:element name="body">
+						<xs:annotation>
+							<xs:documentation>Тело ответа</xs:documentation>
+						</xs:annotation>
 						<xs:complexType>
-							<xs:attribute name="code" type="stringType" use="required"/>
+							<xs:attribute name="code" type="stringType" use="required">
+								<xs:annotation>
+									<xs:documentation>Код ответа хоста эквайера</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
 						</xs:complexType>
 					</xs:element>
 				</xs:sequence>
