@@ -99,6 +99,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <FormType>dfm</FormType>
             <DesignClass>TWebModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="PC1_Request.pas"/>
+        <DCCReference Include="..\..\XMLComponents\request100.pas"/>
         <None Include="js\base64.js"/>
         <None Include="js\ServerFunctionExecutor.js"/>
         <None Include="js\json2.js"/>
