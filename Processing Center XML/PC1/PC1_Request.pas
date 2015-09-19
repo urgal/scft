@@ -11,11 +11,19 @@ implementation
 
 function ParseXML100(aXML :String) : integer;
 var
+  vXMLDocument : IXMLDocument;
   vRequest100 : IXMLRequestType100;
 begin
-  vRequest100 := Request100.Newrequest;
-
-  Result := LogAction(1,'1','1','1','',1,1,'1');
+  vXMLDocument.LoadFromXML(aXML);
+  vRequest100 := Request100.Getrequest(vXMLDocument);
+  Result := LogAction(vRequest100.Number,
+                      vRequest100.Poslun,
+                      aXML,
+                      '',
+                      '',
+                      0,
+                      0,
+                      vRequest100.Type_);
 end;
 
 end.
