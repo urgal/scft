@@ -12,7 +12,9 @@ uses
   PC1_ServerContainerUnit in 'PC1_ServerContainerUnit.pas' {ServerContainer1: TDataModule},
   PC1_WebModuleUnit in 'PC1_WebModuleUnit.pas' {WebModule1: TWebModule},
   PC1_Request in 'PC1_Request.pas',
-  request100 in '..\..\XMLComponents\request100.pas';
+  request100 in '..\..\XMLComponents\request100.pas',
+  PC1_ResponseXML in 'PC1_ResponseXML.pas',
+  response100 in '..\..\XMLComponents\response100.pas';
 
 {$R *.res}
 

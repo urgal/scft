@@ -3,7 +3,7 @@ unit PC1_ServerMethodsUnit;
 interface
 
 uses System.SysUtils, System.Classes, Datasnap.DSServer, Datasnap.DSAuth,
-     Xml.xmldom, Xml.XMLIntf, Xml.Win.msxmldom, Xml.XMLDoc, PC1_Request;
+     Xml.xmldom, Xml.XMLIntf, Xml.Win.msxmldom, Xml.XMLDoc, PC1_Request, PC1_ResponseXML;
 
 type
 {$METHODINFO ON}
@@ -37,7 +37,8 @@ var
   vLogId : integer;
 begin
   vLogId := ParseXML100(aXML);
-  Result := inttostr(vLogId);
+  GetResponse100(vLogId);
+  Result := GetResponse100(vLogId);
 end;
 
 function TServerMethods1.EchoString(Value: string): string;
