@@ -3,7 +3,7 @@
 {                                                                         }
 {                            XML Data Binding                             }
 {                                                                         }
-{         Generated on: 19.09.2015 20:29:27                               }
+{         Generated on: 19.09.2015 21:39:58                               }
 {       Generated from: D:\SVN\HACATON\trunk\Docs\Scheme\request100.xsd   }
 {   Settings stored in: D:\SVN\HACATON\trunk\Docs\Scheme\request100.xdb   }
 {                                                                         }
@@ -29,7 +29,7 @@ type
 { IXMLMessageHeader }
 
   IXMLMessageHeader = interface(IXMLNode)
-    ['{7934133C-79ED-4F07-9BB6-71F51F39700E}']
+    ['{6F570BD0-6AE2-462D-A3F9-9BB9FDDAE5F6}']
     { Property Accessors }
     function Get_Type_: UnicodeString;
     function Get_Number: Integer;
@@ -52,13 +52,13 @@ type
 { IXMLRequestHeader }
 
   IXMLRequestHeader = interface(IXMLMessageHeader)
-    ['{B42ACBEA-81DA-4E87-8AA2-AC91CF88802A}']
+    ['{47737239-BC0D-4824-B28A-C6962143FF4A}']
   end;
 
 { IXMLRequestType100 }
 
   IXMLRequestType100 = interface(IXMLRequestHeader)
-    ['{20C010ED-E32F-45A0-B8C5-60879E9031B1}']
+    ['{318045EE-6EAF-448D-8920-73A73F9064A6}']
     { Property Accessors }
     function Get_Body: IXMLOperation;
     { Methods & Properties }
@@ -68,7 +68,7 @@ type
 { IXMLOperation }
 
   IXMLOperation = interface(IXMLNode)
-    ['{2BC808B2-78DF-4BD2-B8D0-6E2E52EEB13E}']
+    ['{03CF1ACC-9E28-45A3-8D5B-1202A5F00AF3}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_PAN: UnicodeString;
@@ -91,7 +91,7 @@ type
 { IXMLResponseHeader }
 
   IXMLResponseHeader = interface(IXMLRequestHeader)
-    ['{9B7D94FD-ADEC-4C96-B94A-AFDA2E63ECA5}']
+    ['{68FCD935-53EE-4209-A90A-FE73E45234B3}']
     { Property Accessors }
     function Get_Answer: IXMLAnswer;
     { Methods & Properties }
@@ -101,7 +101,7 @@ type
 { IXMLAnswer }
 
   IXMLAnswer = interface(IXMLNode)
-    ['{C9660878-D004-45CB-B921-C79D1CD9B329}']
+    ['{3C73B5BB-5008-4C98-8E97-0DC461F534FB}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_Number: Integer;
@@ -198,7 +198,33 @@ type
     procedure Set_Date(Value: UnicodeString);
   end;
 
+{ Global Functions }
+
+function Getrequest(Doc: IXMLDocument): IXMLRequestType100;
+function Loadrequest(const FileName: string): IXMLRequestType100;
+function Newrequest: IXMLRequestType100;
+
+const
+  TargetNamespace = '';
+
 implementation
+
+{ Global Functions }
+
+function Getrequest(Doc: IXMLDocument): IXMLRequestType100;
+begin
+  Result := Doc.GetDocBinding('request', TXMLRequestType100, TargetNamespace) as IXMLRequestType100;
+end;
+
+function Loadrequest(const FileName: string): IXMLRequestType100;
+begin
+  Result := LoadXMLDocument(FileName).GetDocBinding('request', TXMLRequestType100, TargetNamespace) as IXMLRequestType100;
+end;
+
+function Newrequest: IXMLRequestType100;
+begin
+  Result := NewXMLDocument.GetDocBinding('request', TXMLRequestType100, TargetNamespace) as IXMLRequestType100;
+end;
 
 { TXMLMessageHeader }
 

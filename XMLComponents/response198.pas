@@ -3,7 +3,7 @@
 {                                                                          }
 {                             XML Data Binding                             }
 {                                                                          }
-{         Generated on: 19.09.2015 20:35:13                                }
+{         Generated on: 19.09.2015 21:38:15                                }
 {       Generated from: D:\SVN\HACATON\trunk\Docs\Scheme\response198.xsd   }
 {   Settings stored in: D:\SVN\HACATON\trunk\Docs\Scheme\response198.xdb   }
 {                                                                          }
@@ -30,7 +30,7 @@ type
 { IXMLMessageHeader }
 
   IXMLMessageHeader = interface(IXMLNode)
-    ['{08D60465-B87A-43E3-96DB-71970F59D203}']
+    ['{2ECF1EA1-EC75-4CEE-8962-B85B4DAB79D1}']
     { Property Accessors }
     function Get_Type_: UnicodeString;
     function Get_Number: Integer;
@@ -53,13 +53,13 @@ type
 { IXMLRequestHeader }
 
   IXMLRequestHeader = interface(IXMLMessageHeader)
-    ['{2F26B0E5-9143-4FE9-981D-B8140A529322}']
+    ['{D7C31166-0118-4A0A-9BA5-0BE9120FFB79}']
   end;
 
 { IXMLResponseHeader }
 
   IXMLResponseHeader = interface(IXMLRequestHeader)
-    ['{4F33F872-DC24-4361-81CA-0F8B4BE975CC}']
+    ['{5CBB11EE-4C01-499C-80F9-1CD219C9AB8E}']
     { Property Accessors }
     function Get_Answer: IXMLAnswer;
     { Methods & Properties }
@@ -69,7 +69,7 @@ type
 { IXMLAnswer }
 
   IXMLAnswer = interface(IXMLNode)
-    ['{2B6B7FD5-0EEF-44C0-8DD2-F3FA874F2E57}']
+    ['{E3C788D4-2A68-4DAC-A018-C4D9AB595D8E}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_Number: Integer;
@@ -86,7 +86,7 @@ type
 { IXMLResponseType198 }
 
   IXMLResponseType198 = interface(IXMLResponseHeader)
-    ['{756551D3-0AF0-4A97-A966-A18176A71AA0}']
+    ['{EC31EFAB-F956-4FEB-A94A-0D335F4BAA1B}']
     { Property Accessors }
     function Get_Body: IXMLResponseType198_body;
     { Methods & Properties }
@@ -96,7 +96,7 @@ type
 { IXMLResponseType198_body }
 
   IXMLResponseType198_body = interface(IXMLNode)
-    ['{2B4FB951-2F81-415B-BB08-D15EAC057FFD}']
+    ['{6DC0A3B4-A22A-4EB2-A813-036008EF2078}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_PublicKey: UnicodeString;
@@ -110,7 +110,7 @@ type
 { IXMLOperation }
 
   IXMLOperation = interface(IXMLNode)
-    ['{798F689A-BC74-42AD-9F0B-364808CF016C}']
+    ['{7DA2B73B-765F-4BEE-A2C4-2923241832CD}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_PAN: UnicodeString;
@@ -225,7 +225,33 @@ type
     procedure Set_PINblock(Value: UnicodeString);
   end;
 
+{ Global Functions }
+
+function Getresponse(Doc: IXMLDocument): IXMLResponseType198;
+function Loadresponse(const FileName: string): IXMLResponseType198;
+function Newresponse: IXMLResponseType198;
+
+const
+  TargetNamespace = '';
+
 implementation
+
+{ Global Functions }
+
+function Getresponse(Doc: IXMLDocument): IXMLResponseType198;
+begin
+  Result := Doc.GetDocBinding('response', TXMLResponseType198, TargetNamespace) as IXMLResponseType198;
+end;
+
+function Loadresponse(const FileName: string): IXMLResponseType198;
+begin
+  Result := LoadXMLDocument(FileName).GetDocBinding('response', TXMLResponseType198, TargetNamespace) as IXMLResponseType198;
+end;
+
+function Newresponse: IXMLResponseType198;
+begin
+  Result := NewXMLDocument.GetDocBinding('response', TXMLResponseType198, TargetNamespace) as IXMLResponseType198;
+end;
 
 { TXMLMessageHeader }
 
