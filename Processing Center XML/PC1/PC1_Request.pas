@@ -15,7 +15,7 @@ var
 begin
   vRequest100 := Request100.Newrequest;
 
-  Result := LogAction(1,1,'1','1','',1,1);
+  Result := LogAction(1,'1','1','1','',1,1,'1');
 end;
 
 end.
