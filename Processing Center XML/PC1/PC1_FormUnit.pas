@@ -38,7 +38,7 @@ type
   end;
 
 procedure LogAction(aIDRequest, aIDTerminal : integer;
-                    aTextRequest, aTextResponse : String;
+                    aTextRequest, aTextResponse,aIpAddress : String;
                     aDirection, aErrorCode: Integer);
 
 
@@ -62,7 +62,14 @@ end;
 Procedure TForm1.Refresh;
 begin
   ADOQuery1.Close;
-  ADOQuery1.SQL.Text := 'select * from PC1_log order by 1 desc';
+  ADOQuery1.SQL.Text := 'select IDRequest, '+
+                                'IDTerminal, '+
+                                'Left(TextRequest,200) as TextRequest, '+
+                                'Left(TextResponse,200) as TextResponse, '+
+                                'Direction, '+
+                                'ErrorCode,  '+
+                                'DateTimeTransaction, '+
+                                ' from PC1_log order by 1 desc';
   ADOQuery1.Open;
 end;
 
@@ -126,7 +133,7 @@ end;
 
 
 procedure LogAction(aIDRequest, aIDTerminal : integer;
-                    aTextRequest, aTextResponse : String;
+                    aTextRequest, aTextResponse, aIpAddress : String;
                     aDirection, aErrorCode: Integer);
 
 begin
@@ -136,7 +143,8 @@ begin
                                                    'TextResponse, '+
                                                    'Direction, '+
                                                    'ErrorCode,  '+
-                                                   'DateTimeTransaction)  '+
+                                                   'DateTimeTransaction, '+
+                                                   'ipAdress)  '+
                                 ' values ( '+
                                                      ' :IDRequest, '+
                                                      ' :IDTerminal, '+
@@ -144,14 +152,16 @@ begin
                                                      ' :TextResponse, '+
                                                      ' :Direction, '+
                                                      ' :ErrorCode, '+
-                                                     ' :DateTimeTransaction) ';
+                                                     ' :DateTimeTransaction, '+
+                                                     ' :ipAdress) ';
   Form1.ADOQuery1.Parameters.ParamByName('IDRequest').Value := aIDRequest;
   Form1.ADOQuery1.Parameters.ParamByName('IDTerminal').Value := aIDTerminal;
   Form1.ADOQuery1.Parameters.ParamByName('TextRequest').Value := aTextRequest;
   Form1.ADOQuery1.Parameters.ParamByName('TextResponse').Value := aTextResponse;
   Form1.ADOQuery1.Parameters.ParamByName('Direction').Value := aDirection;
   Form1.ADOQuery1.Parameters.ParamByName('ErrorCode').Value := aErrorCode;
-  Form1.ADOQuery1.Parameters.ParamByName('DateTimeTransaction').Value := Date;
+  Form1.ADOQuery1.Parameters.ParamByName('DateTimeTransaction').Value := Now;
+  Form1.ADOQuery1.Parameters.ParamByName('ipAdress').Value := aIpAddress;
   try
     Form1.ADOQuery1.ExecSQL;
   except

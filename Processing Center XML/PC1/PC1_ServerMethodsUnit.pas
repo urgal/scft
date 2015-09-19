@@ -30,7 +30,7 @@ end;
 
 function TServerMethods1.ReverseString(Value: string): string;
 begin
-  LogAction(1,1,'1','1',1,1);
+  LogAction(1,1,'1','1','',1,1);
   Result := System.StrUtils.ReverseString(Value);
 end;
 end.
