@@ -3,7 +3,7 @@
 {                                                                          }
 {                             XML Data Binding                             }
 {                                                                          }
-{         Generated on: 19.09.2015 20:11:38                                }
+{         Generated on: 19.09.2015 20:35:37                                }
 {       Generated from: D:\SVN\HACATON\trunk\Docs\Scheme\response199.xsd   }
 {   Settings stored in: D:\SVN\HACATON\trunk\Docs\Scheme\response199.xdb   }
 {                                                                          }
@@ -30,33 +30,36 @@ type
 { IXMLMessageHeader }
 
   IXMLMessageHeader = interface(IXMLNode)
-    ['{DE3F11BF-9F5B-4A4D-AAE1-FD7FBCE1B00F}']
+    ['{01814DCA-32DD-4589-9226-7EC0F8D8A0DD}']
     { Property Accessors }
     function Get_Type_: UnicodeString;
     function Get_Number: Integer;
     function Get_Date: UnicodeString;
     function Get_Poslun: UnicodeString;
+    function Get_Batch: Integer;
     procedure Set_Type_(Value: UnicodeString);
     procedure Set_Number(Value: Integer);
     procedure Set_Date(Value: UnicodeString);
     procedure Set_Poslun(Value: UnicodeString);
+    procedure Set_Batch(Value: Integer);
     { Methods & Properties }
     property Type_: UnicodeString read Get_Type_ write Set_Type_;
     property Number: Integer read Get_Number write Set_Number;
     property Date: UnicodeString read Get_Date write Set_Date;
     property Poslun: UnicodeString read Get_Poslun write Set_Poslun;
+    property Batch: Integer read Get_Batch write Set_Batch;
   end;
 
 { IXMLRequestHeader }
 
   IXMLRequestHeader = interface(IXMLMessageHeader)
-    ['{946C254A-9A1E-4785-8C40-8F558F9645FA}']
+    ['{D229334B-B045-4496-8F51-762854B70FF7}']
   end;
 
 { IXMLResponseHeader }
 
   IXMLResponseHeader = interface(IXMLRequestHeader)
-    ['{084B34B9-C376-4FCD-9DE6-09A86F21E528}']
+    ['{3DF82E68-43A6-4D7B-9E34-982B5A5C8243}']
     { Property Accessors }
     function Get_Answer: IXMLAnswer;
     { Methods & Properties }
@@ -66,7 +69,7 @@ type
 { IXMLAnswer }
 
   IXMLAnswer = interface(IXMLNode)
-    ['{23A053AD-6FDF-4F2D-B610-83F90D7168F0}']
+    ['{289C8C73-29DD-4F50-86FA-DE5C65C2134A}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_Number: Integer;
@@ -83,7 +86,7 @@ type
 { IXMLResponseType199 }
 
   IXMLResponseType199 = interface(IXMLResponseHeader)
-    ['{DE5F3F7F-5661-41D2-A03C-FC28F79D9C76}']
+    ['{7AC09F0A-812B-49FB-A263-140D77DCB7BB}']
     { Property Accessors }
     function Get_Body: IXMLResponseType199_body;
     { Methods & Properties }
@@ -93,7 +96,7 @@ type
 { IXMLResponseType199_body }
 
   IXMLResponseType199_body = interface(IXMLNode)
-    ['{23BC9D2F-ADC8-4CE5-803D-5A3709797664}']
+    ['{1A9B341B-471C-45C8-BEAB-59D7F296244B}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     procedure Set_Code(Value: UnicodeString);
@@ -104,7 +107,7 @@ type
 { IXMLOperation }
 
   IXMLOperation = interface(IXMLNode)
-    ['{62862A8E-5A04-4538-9FD0-00ED80E00917}']
+    ['{8B8BE9D3-480A-4D10-9298-4B064075D56F}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_PAN: UnicodeString;
@@ -143,10 +146,12 @@ type
     function Get_Number: Integer;
     function Get_Date: UnicodeString;
     function Get_Poslun: UnicodeString;
+    function Get_Batch: Integer;
     procedure Set_Type_(Value: UnicodeString);
     procedure Set_Number(Value: Integer);
     procedure Set_Date(Value: UnicodeString);
     procedure Set_Poslun(Value: UnicodeString);
+    procedure Set_Batch(Value: Integer);
   end;
 
 { TXMLRequestHeader }
@@ -257,6 +262,16 @@ end;
 procedure TXMLMessageHeader.Set_Poslun(Value: UnicodeString);
 begin
   SetAttribute('poslun', Value);
+end;
+
+function TXMLMessageHeader.Get_Batch: Integer;
+begin
+  Result := AttributeNodes['batch'].NodeValue;
+end;
+
+procedure TXMLMessageHeader.Set_Batch(Value: Integer);
+begin
+  SetAttribute('batch', Value);
 end;
 
 { TXMLRequestHeader }

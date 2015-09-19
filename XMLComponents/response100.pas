@@ -3,7 +3,7 @@
 {                                                                          }
 {                             XML Data Binding                             }
 {                                                                          }
-{         Generated on: 19.09.2015 20:10:52                                }
+{         Generated on: 19.09.2015 20:34:53                                }
 {       Generated from: D:\SVN\HACATON\trunk\Docs\Scheme\response100.xsd   }
 {   Settings stored in: D:\SVN\HACATON\trunk\Docs\Scheme\response100.xdb   }
 {                                                                          }
@@ -30,33 +30,36 @@ type
 { IXMLMessageHeader }
 
   IXMLMessageHeader = interface(IXMLNode)
-    ['{291E6DC4-2FF2-416C-811C-A057C42E3DEC}']
+    ['{24E734C2-3ABF-4BAE-96C9-ECADB9CB3A32}']
     { Property Accessors }
     function Get_Type_: UnicodeString;
     function Get_Number: Integer;
     function Get_Date: UnicodeString;
     function Get_Poslun: UnicodeString;
+    function Get_Batch: Integer;
     procedure Set_Type_(Value: UnicodeString);
     procedure Set_Number(Value: Integer);
     procedure Set_Date(Value: UnicodeString);
     procedure Set_Poslun(Value: UnicodeString);
+    procedure Set_Batch(Value: Integer);
     { Methods & Properties }
     property Type_: UnicodeString read Get_Type_ write Set_Type_;
     property Number: Integer read Get_Number write Set_Number;
     property Date: UnicodeString read Get_Date write Set_Date;
     property Poslun: UnicodeString read Get_Poslun write Set_Poslun;
+    property Batch: Integer read Get_Batch write Set_Batch;
   end;
 
 { IXMLRequestHeader }
 
   IXMLRequestHeader = interface(IXMLMessageHeader)
-    ['{B6F3C505-7D22-49AA-B826-5818F4ADC93C}']
+    ['{E388F1C5-4EA9-4697-85D3-B245022F6149}']
   end;
 
 { IXMLResponseHeader }
 
   IXMLResponseHeader = interface(IXMLRequestHeader)
-    ['{BD29599F-A120-49CA-8A93-2D39CB674BBB}']
+    ['{09BD5FBD-5F51-44C0-960A-DB6F4F937820}']
     { Property Accessors }
     function Get_Answer: IXMLAnswer;
     { Methods & Properties }
@@ -66,7 +69,7 @@ type
 { IXMLAnswer }
 
   IXMLAnswer = interface(IXMLNode)
-    ['{590D1AF3-064F-4FE4-A248-C98157157988}']
+    ['{F4DECBBA-A168-4490-8E0E-5C3E931459BF}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_Number: Integer;
@@ -83,7 +86,7 @@ type
 { IXMLResponseType100 }
 
   IXMLResponseType100 = interface(IXMLResponseHeader)
-    ['{B6DB1BC6-B0CE-41E6-B598-ED8AE83D2B67}']
+    ['{B8E10AD7-8B8A-4486-8F03-627870415E94}']
     { Property Accessors }
     function Get_Body: IXMLResponseType100_body;
     { Methods & Properties }
@@ -93,7 +96,7 @@ type
 { IXMLResponseType100_body }
 
   IXMLResponseType100_body = interface(IXMLNode)
-    ['{D212119C-DF1F-4BA1-B03C-ABCED5EFF723}']
+    ['{75F969BF-80B7-4FDD-B9A5-EB6478BF1A40}']
     { Property Accessors }
     function Get_ResponseCode: UnicodeString;
     function Get_AuthorizationCode: UnicodeString;
@@ -109,7 +112,7 @@ type
 { IXMLOperation }
 
   IXMLOperation = interface(IXMLNode)
-    ['{9726A94A-CF5A-4D0B-A4DD-B7DC0D371878}']
+    ['{14677F9D-DDFF-4AC1-84C3-52177BDBEC4D}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_PAN: UnicodeString;
@@ -148,10 +151,12 @@ type
     function Get_Number: Integer;
     function Get_Date: UnicodeString;
     function Get_Poslun: UnicodeString;
+    function Get_Batch: Integer;
     procedure Set_Type_(Value: UnicodeString);
     procedure Set_Number(Value: Integer);
     procedure Set_Date(Value: UnicodeString);
     procedure Set_Poslun(Value: UnicodeString);
+    procedure Set_Batch(Value: Integer);
   end;
 
 { TXMLRequestHeader }
@@ -267,6 +272,16 @@ end;
 procedure TXMLMessageHeader.Set_Poslun(Value: UnicodeString);
 begin
   SetAttribute('poslun', Value);
+end;
+
+function TXMLMessageHeader.Get_Batch: Integer;
+begin
+  Result := AttributeNodes['batch'].NodeValue;
+end;
+
+procedure TXMLMessageHeader.Set_Batch(Value: Integer);
+begin
+  SetAttribute('batch', Value);
 end;
 
 { TXMLRequestHeader }
