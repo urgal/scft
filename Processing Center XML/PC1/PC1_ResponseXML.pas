@@ -14,6 +14,7 @@ function GetResponse100(LogId: integer): string;
 var
   vResponse100: IXMLResponseType100;
   vXML: string;
+  vLogId: integer;
 begin
   vResponse100:= Response100.NewResponse;
   try
@@ -21,7 +22,7 @@ begin
     vResponse100.Answer.Code:= '000';
     vResponse100.Body.ResponseCode:= '0AA';
     vXML:= vResponse100.XML;
-    //LogAction(1,1,'1','1','',1,1);
+    LogId := LogAction(1,'1','1','1','',1,1,'1');
     Result := vXML;
   finally
 
@@ -32,6 +33,7 @@ function GetResponse198(LogId: integer): string;
 var
   vResponse100: IXMLResponseType100;
   vXML: string;
+  vLogId: integer;
 begin
   vResponse100:= Response100.NewResponse;
   try
@@ -39,7 +41,7 @@ begin
     vResponse100.Answer.Code:= '000';
     vResponse100.Body.ResponseCode:= '0AA';
     vXML:= vResponse100.XML;
-    //LogAction(1,1,'1','1','',1,1);
+    LogId := LogAction(1,'1','1','1','',1,1,'1');
     Result := vXML;
   finally
 
@@ -50,6 +52,7 @@ function GetResponse199(LogId: integer): string;
 var
   vResponse100: IXMLResponseType100;
   vXML: string;
+  vLogId: integer;
 begin
   vResponse100:= Response100.NewResponse;
   try
@@ -57,7 +60,7 @@ begin
     vResponse100.Answer.Code:= '000';
     vResponse100.Body.ResponseCode:= '0AA';
     vXML:= vResponse100.XML;
-    //LogAction(1,1,'1','1','',1,1);
+    LogId := LogAction(1,'1','1','1','',1,1,'1');
     Result := vXML;
   finally
 
