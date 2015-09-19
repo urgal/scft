@@ -11,6 +11,7 @@
 		<xs:attribute name="number" type="numberType" use="required"/>
 		<xs:attribute name="date" type="dateType" use="required"/>
 		<xs:attribute name="poslun" type="stringType" use="required"/>
+		<xs:attribute name="batch" type="numberType" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="operation">
 		<xs:annotation>
