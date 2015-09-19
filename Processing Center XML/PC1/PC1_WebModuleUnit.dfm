@@ -88,6 +88,7 @@ object WebModule1: TWebModule1
     Top = 248
   end
   object DSServerMetaDataProvider1: TDSServerMetaDataProvider
+    Server = ServerContainer1.DSServer1
     Left = 208
     Top = 248
   end
