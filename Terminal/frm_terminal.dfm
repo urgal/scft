@@ -158,4 +158,22 @@ object TerminalForm: TTerminalForm
     Left = 384
     Top = 272
   end
+  object rstClient: TRESTClient
+    Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Params = <>
+    HandleRedirects = True
+    Left = 384
+    Top = 24
+  end
+  object rstReq: TRESTRequest
+    Client = rstClient
+    Params = <>
+    Response = rstResp
+    Left = 384
+    Top = 72
+  end
+  object rstResp: TRESTResponse
+    Left = 384
+    Top = 120
+  end
 end

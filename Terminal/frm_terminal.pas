@@ -4,7 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools, Data.Win.ADODB, terminal_db;
+  Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools, Data.Win.ADODB, terminal_db,
+  IPPeerClient,
+  REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
   TTerminalForm = class(TForm)
@@ -26,10 +28,14 @@ type
     btGenerate: TButton;
     btOpenShift: TButton;
     dbTermOpers: TDBGrid;
+    rstClient: TRESTClient;
+    rstReq: TRESTRequest;
+    rstResp: TRESTResponse;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
     procedure btSendClick(Sender: TObject);
+    procedure CreateXMLFile;
   private
     FCurrentTerminalID : integer;
     FCurrentShiftID : integer;
@@ -84,6 +90,8 @@ begin
 end;
 
 procedure TTerminalForm.btSendClick(Sender: TObject);
+var
+  vPageName : string;
 begin
   try
     LogOperationFields(FGenerateFields);
@@ -91,6 +99,21 @@ begin
     on E : Exception do begin
       ShowMessage(E.Message);
     end;
+  end;
+  rstClient.BaseURL := 'http://10.168.1.236:8080/rest/authorizeTransaction?transactionToken=dsalghsdgc';
+  CreateXMLFile;
+  //rstReq.Timeout := 5000;
+  try //отправка сообщения
+    //rstReq.Method := rmGET;
+    rstReq.Execute;
+  except
+    on E:Exception do
+      ShowMessage(E.Message);
+  end;
+  if Assigned(rstResp.JSONValue) then
+  begin  //обработка ответа
+    rstResp.GetSimpleValue('title', vPageName);
+    ShowMessage(vPageName);
   end;
 end;
 
@@ -112,6 +135,11 @@ begin
   edTermID.Text := IntToStr(FCurrentTerminalID);
   list := cbOperType.Items;
   InitOperationList(list);
+end;
+
+procedure TTerminalForm.CreateXMLFile;
+begin //создание xml-файла запроса
+//
 end;
 
 end.
