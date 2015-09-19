@@ -14,7 +14,14 @@ dependencies {
     compile 'org.codehaus.groovy:groovy:2.4+'
     compile 'org.springframework:spring-core:4.2+'
     compile 'org.springframework:spring-webmvc:4.2+'
+    compile 'org.springframework:spring-web:4.2+'
     compile 'org.springframework:spring-context:4.2+'
+    compile 'org.springframework.boot:spring-boot:1.2+'
+    compile 'org.springframework:spring-oxm:4.2+'
+    compile 'com.thoughtworks.xstream:xstream:1.4.8'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6+'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6+'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6+'
 
     testCompile 'junit:junit:4.12'
 }
@@ -22,4 +29,5 @@ dependencies {
 gretty {
     contextPath '/'
     logbackConfigFile "$projectDir/src/main/resources/logback.groovy"
+    springBoot = true
 }
