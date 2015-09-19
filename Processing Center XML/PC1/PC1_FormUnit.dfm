@@ -98,12 +98,17 @@ object Form1: TForm1
     Top = 24
   end
   object ADOConnection1: TADOConnection
-    Connected = True
     ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\'#1040#1076#1084#1080#1085#1080#1089#1090#1088#1072 +
-      #1090#1086#1088'\Desktop\PCBase.mdb;Persist Security Info=False'
+      'Provider=Microsoft.Jet.OLEDB.4.0;User ID=Admin;Data Source=\\ADM' +
+      'INISTRATOR\base\PCBase.mdb;Mode=Share Deny None;Persist Security' +
+      ' Info=False;Jet OLEDB:System database="";Jet OLEDB:Registry Path' +
+      '="";Jet OLEDB:Database Password="";Jet OLEDB:Engine Type=5;Jet O' +
+      'LEDB:Database Locking Mode=1;Jet OLEDB:Global Partial Bulk Ops=2' +
+      ';Jet OLEDB:Global Bulk Transactions=1;Jet OLEDB:New Database Pas' +
+      'sword="";Jet OLEDB:Create System Database=False;Jet OLEDB:Encryp' +
+      't Database=False;Jet OLEDB:Don'#39't Copy Locale on Compact=False;Je' +
+      't OLEDB:Compact Without Replica Repair=False;Jet OLEDB:SFP=False'
     LoginPrompt = False
-    Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 384
     Top = 8
