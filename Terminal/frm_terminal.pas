@@ -108,7 +108,7 @@ var
   vResult, vXML : string;
   vFields : TOperationFields;
 begin
-  for i := 1 to random(5) + 1 do
+  for i := 1 to random(12) + 3 do
   begin
     GenerateOperationFields(FCurrentTerminalID, FCurrentShiftID, vFields);
     try
@@ -116,22 +116,22 @@ begin
     except
       on E : Exception do
       begin
-        ShowMessage(E.Message);
+        //ShowMessage(E.Message);
       end;
     end;
     OperQuery.Active := false;
     OperQuery.Active := true;
     OperQuery.Last;
+    Application.ProcessMessages;
     try
       SendOperationData(vFields);
     except
       on E : Exception do
       begin
-        ShowMessage(E.Message);
+        //ShowMessage(E.Message);
       end;
     end;
   end;
-
 end;
 
 procedure TTerminalForm.btSendClick(Sender: TObject);

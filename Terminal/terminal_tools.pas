@@ -85,7 +85,7 @@ begin
     974:
       Result := random(1000000) + 10000;
     840, 978:
-      Result := random(1000) + 10 + random(10) * 0.1;
+      Result := random(1000) + 10;
   else
     Result := random(100) + 10;
   end;
