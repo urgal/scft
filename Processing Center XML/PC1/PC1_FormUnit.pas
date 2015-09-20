@@ -177,7 +177,7 @@ begin
   Form1.ADOQuery1.Parameters.ParamByName('IDRequest').Value := aIDRequest;
   Form1.ADOQuery1.Parameters.ParamByName('IDTerminal').Value := aIDTerminal;
   Form1.ADOQuery1.Parameters.ParamByName('TextRequest').Value := aTextRequest;
-  Form1.ADOQuery1.Parameters.ParamByName('TextResponse').Value := aTextResponse;
+  Form1.ADOQuery1.Parameters.ParamByName('TextResponse').Value := EncodeString(aTextResponse);
   Form1.ADOQuery1.Parameters.ParamByName('Direction').Value := aDirection;
   Form1.ADOQuery1.Parameters.ParamByName('ErrorCode').Value := aErrorCode;
   Form1.ADOQuery1.Parameters.ParamByName('DateTimeTransaction').Value := Now;
