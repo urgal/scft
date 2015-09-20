@@ -3,15 +3,27 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<!--Базоые типы данных-->
 	<xs:simpleType name="dateType">
+		<xs:annotation>
+			<xs:documentation>Тип данных для представление ДАТЫ</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:date"/>
 	</xs:simpleType>
 	<xs:simpleType name="numberType">
+		<xs:annotation>
+			<xs:documentation>Тип данных для представления ЦЕЛЫХ ЧИСЕЛ</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:integer"/>
 	</xs:simpleType>
 	<xs:simpleType name="realType">
+		<xs:annotation>
+			<xs:documentation>Тип данных для представления ВЕЩЕСТВЕННЫХ ЧИСЕЛ</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:float"/>
 	</xs:simpleType>
 	<xs:simpleType name="stringType">
+		<xs:annotation>
+			<xs:documentation>Тип данных для представления СТРОК</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
 </xs:schema>

@@ -3,7 +3,7 @@
 {                                                                          }
 {                             XML Data Binding                             }
 {                                                                          }
-{         Generated on: 19.09.2015 20:35:37                                }
+{         Generated on: 19.09.2015 21:36:52                                }
 {       Generated from: D:\SVN\HACATON\trunk\Docs\Scheme\response199.xsd   }
 {   Settings stored in: D:\SVN\HACATON\trunk\Docs\Scheme\response199.xdb   }
 {                                                                          }
@@ -30,7 +30,7 @@ type
 { IXMLMessageHeader }
 
   IXMLMessageHeader = interface(IXMLNode)
-    ['{01814DCA-32DD-4589-9226-7EC0F8D8A0DD}']
+    ['{A0D26EC1-7819-4881-9B90-6D1FEC356089}']
     { Property Accessors }
     function Get_Type_: UnicodeString;
     function Get_Number: Integer;
@@ -53,13 +53,13 @@ type
 { IXMLRequestHeader }
 
   IXMLRequestHeader = interface(IXMLMessageHeader)
-    ['{D229334B-B045-4496-8F51-762854B70FF7}']
+    ['{09D38859-0458-4D5C-A173-813572171FB7}']
   end;
 
 { IXMLResponseHeader }
 
   IXMLResponseHeader = interface(IXMLRequestHeader)
-    ['{3DF82E68-43A6-4D7B-9E34-982B5A5C8243}']
+    ['{848EAF55-5D02-4654-B846-845A0478EC12}']
     { Property Accessors }
     function Get_Answer: IXMLAnswer;
     { Methods & Properties }
@@ -69,7 +69,7 @@ type
 { IXMLAnswer }
 
   IXMLAnswer = interface(IXMLNode)
-    ['{289C8C73-29DD-4F50-86FA-DE5C65C2134A}']
+    ['{7B835589-FAFF-49E8-981F-281B4D4B5E8F}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_Number: Integer;
@@ -86,7 +86,7 @@ type
 { IXMLResponseType199 }
 
   IXMLResponseType199 = interface(IXMLResponseHeader)
-    ['{7AC09F0A-812B-49FB-A263-140D77DCB7BB}']
+    ['{D2CB77F8-66B6-4B91-A7E3-0A20BF004E3A}']
     { Property Accessors }
     function Get_Body: IXMLResponseType199_body;
     { Methods & Properties }
@@ -96,7 +96,7 @@ type
 { IXMLResponseType199_body }
 
   IXMLResponseType199_body = interface(IXMLNode)
-    ['{1A9B341B-471C-45C8-BEAB-59D7F296244B}']
+    ['{82C7C9A0-6CEA-4814-B4B1-50467AE9F018}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     procedure Set_Code(Value: UnicodeString);
@@ -107,7 +107,7 @@ type
 { IXMLOperation }
 
   IXMLOperation = interface(IXMLNode)
-    ['{8B8BE9D3-480A-4D10-9298-4B064075D56F}']
+    ['{02D7EFF7-7EEB-4675-AD33-1F946B5CC8F0}']
     { Property Accessors }
     function Get_Code: UnicodeString;
     function Get_PAN: UnicodeString;
@@ -220,7 +220,50 @@ type
     procedure Set_PINblock(Value: UnicodeString);
   end;
 
+{ Global Functions }
+
+function GetUnknown(Doc: IXMLDocument): IXMLMessageHeader;
+function LoadUnknown(const FileName: string): IXMLMessageHeader;
+function NewUnknown: IXMLMessageHeader;
+function Getresponse(Doc: IXMLDocument): IXMLResponseType199;
+function Loadresponse(const FileName: string): IXMLResponseType199;
+function Newresponse: IXMLResponseType199;
+
+const
+  TargetNamespace = '';
+
 implementation
+
+{ Global Functions }
+
+function GetUnknown(Doc: IXMLDocument): IXMLMessageHeader;
+begin
+  Result := Doc.GetDocBinding('Unknown', TXMLMessageHeader, TargetNamespace) as IXMLMessageHeader;
+end;
+
+function LoadUnknown(const FileName: string): IXMLMessageHeader;
+begin
+  Result := LoadXMLDocument(FileName).GetDocBinding('Unknown', TXMLMessageHeader, TargetNamespace) as IXMLMessageHeader;
+end;
+
+function NewUnknown: IXMLMessageHeader;
+begin
+  Result := NewXMLDocument.GetDocBinding('Unknown', TXMLMessageHeader, TargetNamespace) as IXMLMessageHeader;
+end;
+function Getresponse(Doc: IXMLDocument): IXMLResponseType199;
+begin
+  Result := Doc.GetDocBinding('response', TXMLResponseType199, TargetNamespace) as IXMLResponseType199;
+end;
+
+function Loadresponse(const FileName: string): IXMLResponseType199;
+begin
+  Result := LoadXMLDocument(FileName).GetDocBinding('response', TXMLResponseType199, TargetNamespace) as IXMLResponseType199;
+end;
+
+function Newresponse: IXMLResponseType199;
+begin
+  Result := NewXMLDocument.GetDocBinding('response', TXMLResponseType199, TargetNamespace) as IXMLResponseType199;
+end;
 
 { TXMLMessageHeader }
 

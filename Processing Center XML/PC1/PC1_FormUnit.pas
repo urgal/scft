@@ -5,7 +5,8 @@ interface
 uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.AppEvnts, Vcl.StdCtrls, IdHTTPWebBrokerBridge, Web.HTTPApp, Vcl.Grids,
-  Vcl.DBGrids, Data.DB, Data.Win.ADODB;
+  Vcl.DBGrids, Data.DB, Data.Win.ADODB, Xml.xmldom, Xml.XMLIntf,
+  Xml.Win.msxmldom, Xml.XMLDoc, Soap.EncdDecd;
 
 type
   TForm1 = class(TForm)
@@ -37,9 +38,10 @@ type
     { Public declarations }
   end;
 
-procedure LogAction(aIDRequest, aIDTerminal : integer;
-                    aTextRequest, aTextResponse,aIpAddress : String;
-                    aDirection, aErrorCode: Integer);
+function LogAction(aIDRequest: integer;
+                   aIDTerminal, aTextRequest, aTextResponse, aIpAddress : String;
+                   aDirection, aErrorCode: Integer;
+                   aTypeRequest :String) : integer;
 
 
 var
@@ -62,13 +64,15 @@ end;
 Procedure TForm1.Refresh;
 begin
   ADOQuery1.Close;
-  ADOQuery1.SQL.Text := 'select IDRequest, '+
+  ADOQuery1.SQL.Text := 'select ID, '+
+                                'IDRequest, '+
+                                'TypeRequest, '+
                                 'IDTerminal, '+
                                 'Left(TextRequest,200) as TextRequest, '+
                                 'Left(TextResponse,200) as TextResponse, '+
                                 'Direction, '+
                                 'ErrorCode,  '+
-                                'DateTimeTransaction, '+
+                                'DateTimeTransaction '+
                                 ' from PC1_log order by 1 desc';
   ADOQuery1.Open;
 end;
@@ -132,10 +136,10 @@ begin
 end;
 
 
-procedure LogAction(aIDRequest, aIDTerminal : integer;
-                    aTextRequest, aTextResponse, aIpAddress : String;
-                    aDirection, aErrorCode: Integer);
-
+function LogAction(aIDRequest: integer;
+                   aIDTerminal, aTextRequest, aTextResponse, aIpAddress : String;
+                   aDirection, aErrorCode: Integer;
+                   aTypeRequest :String) : integer;
 begin
   Form1.ADOQuery1.SQL.Text := 'insert into PC1_Log (IDRequest, '+
                                                    'IDTerminal, '+
@@ -144,7 +148,8 @@ begin
                                                    'Direction, '+
                                                    'ErrorCode,  '+
                                                    'DateTimeTransaction, '+
-                                                   'ipAdress)  '+
+                                                   'ipAdress, '+
+                                                   'TypeRequest)  '+
                                 ' values ( '+
                                                      ' :IDRequest, '+
                                                      ' :IDTerminal, '+
@@ -153,7 +158,8 @@ begin
                                                      ' :Direction, '+
                                                      ' :ErrorCode, '+
                                                      ' :DateTimeTransaction, '+
-                                                     ' :ipAdress) ';
+                                                     ' :ipAdress, '+
+                                                     ' :TypeRequest) ';
   Form1.ADOQuery1.Parameters.ParamByName('IDRequest').Value := aIDRequest;
   Form1.ADOQuery1.Parameters.ParamByName('IDTerminal').Value := aIDTerminal;
   Form1.ADOQuery1.Parameters.ParamByName('TextRequest').Value := aTextRequest;
@@ -162,12 +168,14 @@ begin
   Form1.ADOQuery1.Parameters.ParamByName('ErrorCode').Value := aErrorCode;
   Form1.ADOQuery1.Parameters.ParamByName('DateTimeTransaction').Value := Now;
   Form1.ADOQuery1.Parameters.ParamByName('ipAdress').Value := aIpAddress;
+  Form1.ADOQuery1.Parameters.ParamByName('TypeRequest').Value := aTypeRequest;
   try
     Form1.ADOQuery1.ExecSQL;
+    Form1.Refresh;
+    Result := Form1.ADOQuery1.Fields[0].AsInteger;
   except
-
+    Result := 0;
   end;
-  Form1.Refresh;
 end;
 
 

@@ -5,15 +5,14 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools, Data.Win.ADODB, terminal_db,
-  IPPeerClient,
-  REST.Client, REST.Types, Data.Bind.Components, Data.Bind.ObjectScope;
+  IPPeerClient, REST.Client, REST.Types,
+  Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
   TTerminalForm = class(TForm)
     edTermID: TEdit;
     btPacketMode: TButton;
     edPan: TEdit;
-    edCurrency: TEdit;
     edAmount: TEdit;
     btSend: TButton;
     cbOperType: TComboBox;
@@ -31,11 +30,14 @@ type
     rstClient: TRESTClient;
     rstReq: TRESTRequest;
     rstResp: TRESTResponse;
+    edCurrency: TEdit;
+    lbPinBlock: TLabel;
+    edPinBlock: TEdit;
+    Edit1: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
     procedure btSendClick(Sender: TObject);
-    procedure CreateXMLFile;
   private
     FCurrentTerminalID : integer;
     FCurrentShiftID : integer;
@@ -48,6 +50,9 @@ var
   TerminalForm: TTerminalForm;
 
 implementation
+
+uses
+  xmlrequest, xmlresponse;
 
 {$R *.dfm}
 
@@ -91,29 +96,35 @@ end;
 
 procedure TTerminalForm.btSendClick(Sender: TObject);
 var
-  vPageName : string;
+  vResult, vXML : string;
 begin
-  try
+  {try
     LogOperationFields(FGenerateFields);
   except
     on E : Exception do begin
       ShowMessage(E.Message);
     end;
-  end;
-  rstClient.BaseURL := 'http://10.168.1.236:8080/rest/authorizeTransaction?transactionToken=dsalghsdgc';
-  CreateXMLFile;
-  //rstReq.Timeout := 5000;
+  end;}
+  vXML := xmlrequest.CreateXMLFile(edTermID.Text, edShiftID.Text,
+            edCurrency.Text, inttostr(GenerateOperationType), edPan.Text,
+            edPinBlock.Text, edAmount.Text);
+  rstClient.BaseURL := 'http://10.168.1.236:8081/rest/request100' +'?' + vXML;
+  Edit1.Text := vXML;
+  Edit1.Visible := false;
+//  rstReq.AddBody(vXML, ctAPPLICATION_XML);
+//  rstReq.Timeout := 5000;
   try //отправка сообщения
-    //rstReq.Method := rmGET;
+    rstReq.Method := rmPost;
     rstReq.Execute;
   except
     on E:Exception do
       ShowMessage(E.Message);
   end;
   if Assigned(rstResp.JSONValue) then
-  begin  //обработка ответа
-    rstResp.GetSimpleValue('title', vPageName);
-    ShowMessage(vPageName);
+  begin //обработка ответа
+
+    //rstResp.GetSimpleValue('result', vResult);
+    ShowMessage(rstresp.Content);
   end;
 end;
 
@@ -135,11 +146,6 @@ begin
   edTermID.Text := IntToStr(FCurrentTerminalID);
   list := cbOperType.Items;
   InitOperationList(list);
-end;
-
-procedure TTerminalForm.CreateXMLFile;
-begin //создание xml-файла запроса
-//
 end;
 
 end.

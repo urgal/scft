@@ -4,16 +4,34 @@
 	<xs:include schemaLocation="basetypes.xsd"/>
 	<xs:include schemaLocation="objecttypes.xsd"/>
 	<xs:complexType name="responseType100">
+		<xs:annotation>
+			<xs:documentation>Ответ на авторизационные запрос операции</xs:documentation>
+		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="responseHeader">
 				<xs:sequence>
 					<xs:element name="body">
+						<xs:annotation>
+							<xs:documentation>Тело ответа</xs:documentation>
+						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="operation" type="operation"/>
+								<xs:element name="operation" type="operation">
+									<xs:annotation>
+										<xs:documentation>Данные оригинальной операции</xs:documentation>
+									</xs:annotation>
+								</xs:element>
 							</xs:sequence>
-							<xs:attribute name="responseCode" type="stringType" use="required"/>
-							<xs:attribute name="authorizationCode" type="stringType"/>
+							<xs:attribute name="responseCode" type="stringType" use="required">
+								<xs:annotation>
+									<xs:documentation>Ответ хоста эквайера</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="authorizationCode" type="stringType">
+								<xs:annotation>
+									<xs:documentation>Код авторизации</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
 						</xs:complexType>
 					</xs:element>
 				</xs:sequence>
