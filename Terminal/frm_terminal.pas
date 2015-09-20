@@ -110,7 +110,7 @@ var
   vFields : TOperationFields;
 begin
   PacketProgress.Min := 0;
-  PacketProgress.Max := random(12) + 3;
+  PacketProgress.Max := random(7) + 3;
   PacketProgress.Position := 0;
   for i := 1 to PacketProgress.Max do
   begin
