@@ -15,65 +15,65 @@ object TerminalForm: TTerminalForm
   PixelsPerInch = 96
   TextHeight = 13
   object lbTermID: TLabel
-    Left = 200
-    Top = 51
+    Left = 8
+    Top = 45
     Width = 68
     Height = 13
     Caption = 'ID '#1090#1077#1088#1084#1080#1085#1072#1083#1072
   end
   object lbShiftID: TLabel
-    Left = 200
-    Top = 77
+    Left = 8
+    Top = 71
     Width = 45
     Height = 13
     Caption = 'ID '#1089#1084#1077#1085#1099
   end
   object lbPAN: TLabel
-    Left = 200
-    Top = 131
+    Left = 8
+    Top = 125
     Width = 55
     Height = 13
     Caption = 'PAN '#1082#1072#1088#1090#1099
   end
   object lbCurrency: TLabel
-    Left = 200
-    Top = 182
+    Left = 8
+    Top = 176
     Width = 39
     Height = 13
     Caption = #1042#1072#1083#1102#1090#1072
   end
   object lbAmount: TLabel
-    Left = 200
-    Top = 211
+    Left = 8
+    Top = 205
     Width = 31
     Height = 13
     Caption = #1057#1091#1084#1084#1072
   end
   object lbOperType: TLabel
-    Left = 200
-    Top = 105
+    Left = 8
+    Top = 99
     Width = 50
     Height = 13
     Caption = #1054#1087#1077#1088#1072#1094#1080#1103
   end
   object lbPinBlock: TLabel
-    Left = 200
-    Top = 158
+    Left = 8
+    Top = 152
     Width = 45
     Height = 13
     Caption = 'PIN-'#1073#1083#1086#1082
   end
   object edTermID: TEdit
-    Left = 278
-    Top = 48
+    Left = 86
+    Top = 42
     Width = 145
     Height = 21
     Enabled = False
     TabOrder = 0
   end
   object btPacketMode: TButton
-    Left = 460
-    Top = 233
+    Left = 552
+    Top = 230
     Width = 75
     Height = 25
     Caption = #1040#1074#1090#1086'-'#1088#1077#1078#1080#1084
@@ -82,24 +82,24 @@ object TerminalForm: TTerminalForm
     OnClick = btPacketModeClick
   end
   object edPan: TEdit
-    Left = 278
-    Top = 128
+    Left = 86
+    Top = 122
     Width = 145
     Height = 21
     Enabled = False
     TabOrder = 2
   end
   object edAmount: TEdit
-    Left = 278
-    Top = 209
+    Left = 86
+    Top = 203
     Width = 145
     Height = 21
     Enabled = False
     TabOrder = 3
   end
   object btSend: TButton
-    Left = 348
-    Top = 233
+    Left = 156
+    Top = 230
     Width = 75
     Height = 25
     Caption = #1054#1090#1087#1088#1072#1074#1082#1072
@@ -108,24 +108,24 @@ object TerminalForm: TTerminalForm
     OnClick = btSendClick
   end
   object cbOperType: TComboBox
-    Left = 278
-    Top = 101
+    Left = 86
+    Top = 95
     Width = 145
     Height = 21
     Enabled = False
     TabOrder = 5
   end
   object edShiftID: TEdit
-    Left = 278
-    Top = 74
+    Left = 86
+    Top = 68
     Width = 145
     Height = 21
     Enabled = False
     TabOrder = 6
   end
   object btGenerate: TButton
-    Left = 200
-    Top = 233
+    Left = 8
+    Top = 230
     Width = 137
     Height = 25
     Caption = #1043#1077#1085#1077#1088#1072#1094#1080#1103
@@ -134,8 +134,8 @@ object TerminalForm: TTerminalForm
     OnClick = btGenerateClick
   end
   object btOpenShift: TButton
-    Left = 200
-    Top = 8
+    Left = 8
+    Top = 10
     Width = 223
     Height = 25
     Caption = #1054#1090#1082#1088#1099#1090#1100' '#1089#1084#1077#1085#1091
@@ -157,20 +157,27 @@ object TerminalForm: TTerminalForm
     TitleFont.Style = []
   end
   object edCurrency: TEdit
-    Left = 278
-    Top = 182
+    Left = 86
+    Top = 176
     Width = 59
     Height = 21
     Enabled = False
     TabOrder = 10
   end
   object edPinBlock: TEdit
-    Left = 278
-    Top = 155
+    Left = 86
+    Top = 149
     Width = 145
     Height = 21
     Enabled = False
     TabOrder = 11
+  end
+  object PacketProgress: TProgressBar
+    Left = 248
+    Top = 230
+    Width = 298
+    Height = 25
+    TabOrder = 12
   end
   object dsTermOpers: TDataSource
     DataSet = OperQuery

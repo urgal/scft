@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools, Data.Win.ADODB, terminal_db,
   IPPeerClient, REST.Client, REST.Types, Soap.EncdDecd,
-  Data.Bind.ObjectScope, Data.Bind.Components;
+  Data.Bind.ObjectScope, Data.Bind.Components, Vcl.ComCtrls;
 
 type
   TTerminalForm = class(TForm)
@@ -34,6 +34,7 @@ type
     lbPinBlock: TLabel;
     edPinBlock: TEdit;
     OperQuery: TADOQuery;
+    PacketProgress: TProgressBar;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
@@ -108,8 +109,11 @@ var
   vResult, vXML : string;
   vFields : TOperationFields;
 begin
-  for i := 1 to random(12) + 3 do
+  PacketProgress.Min := 0;
+  PacketProgress.Max := random(12) + 3;
+  for i := 1 to PacketProgress.Max do
   begin
+    PacketProgress.Position := i;
     GenerateOperationFields(FCurrentTerminalID, FCurrentShiftID, vFields);
     try
       LogOperationFields(vFields);
@@ -202,7 +206,6 @@ begin
   OperQuery.Connection := GetADOConnection;
   OperQuery.Parameters.ParseSQL(OperQuery.SQL.Text, true);
   OperQuery.Parameters.ParamValues['shiftID'] := FCurrentShiftID;
-  //OperQuery.Active := true;
 end;
 
 end.
