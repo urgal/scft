@@ -1,8 +1,8 @@
-unit PC1_ResponseXML;
+unit PC2_ResponseXML;
 
 interface
 
-uses PC1_FormUnit, System.SysUtils, System.StrUtils, System.Classes, Xml.XMLDoc,
+uses PC2_FormUnit, System.SysUtils, System.StrUtils, System.Classes, Xml.XMLDoc,
      response100, response198, response199, Soap.EncdDecd, Data.Win.ADODB;
 
 function GetResponse100(LogId: integer): string;
@@ -19,11 +19,8 @@ var
   vSQLq: TADOQuery;
 begin
   vResponse100:= Response100.NewResponse;
-
   try
-
     vSQLq := TADOQuery.Create(nil);
-    vSQLq.Connection := Form1.ADOConnection1;
     vSQLq.SQL.Text:= 'select ID, '+
                                 'IDRequest, '+
                                 'TypeRequest, '+
@@ -33,9 +30,9 @@ begin
                                 'Direction, '+
                                 'ErrorCode,  '+
                                 'DateTimeTransaction '+
-                                ' from PC1_log where ID = '+IntToStr(LogId)+' order by 1 desc';
+                                ' from PC2_log where id=:ID order by 1 desc';
 
-    //vSQLq.Parameters.Items[1].Value := LogId;
+    vSQLq.Parameters.ParamByName('ID').Value := LogId;
 
     try
       vSQLq.Open;
@@ -47,8 +44,7 @@ begin
     vResponse100.Poslun  := vSQLq.FieldByName('IDTerminal').Value;
       //Result := Form1.ADOQuery1.Fields[0].AsInteger;
     except
-      on E : Exception do
-        WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
+      //Result := 0;
     end;
 
     vXML:= vResponse100.XML;
@@ -61,10 +57,9 @@ begin
                       0,
                       vResponse100.Type_);
     Result := EncodeString(vXML);
-  except
-    on E : Exception do
-      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
-  end;
+  finally
+
+ end;
 end;
 
 function GetResponse198(LogId: integer): string;
@@ -87,10 +82,9 @@ begin
                       0,
                       vResponse198.Type_);
     Result := EncodeString(vXML);
-  except
-    on E : Exception do
-      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
-  end;
+  finally
+
+ end;
 end;
 
 function GetResponse199(LogId: integer): string;
@@ -113,10 +107,9 @@ begin
                       0,
                       vResponse199.Type_);
     Result := EncodeString(vXML);
-  except
-    on E : Exception do
-      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
-  end;
+  finally
+
+ end;
 end;
 
 

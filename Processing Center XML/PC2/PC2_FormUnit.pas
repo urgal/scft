@@ -1,4 +1,4 @@
-unit PC1_FormUnit;
+unit PC2_FormUnit;
 
 interface
 
@@ -22,7 +22,6 @@ type
     DBGrid1: TDBGrid;
     Button1: TButton;
     Button2: TButton;
-    Button3: TButton;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
     procedure ButtonStartClick(Sender: TObject);
@@ -30,7 +29,6 @@ type
     procedure ButtonOpenBrowserClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
   private
     FServer: TIdHTTPWebBrokerBridge;
     procedure StartServer;
@@ -45,7 +43,6 @@ function LogAction(aIDRequest: integer;
                    aDirection, aErrorCode: Integer;
                    aTypeRequest :String) : integer;
 
-procedure WriteStr(line: string);
 
 var
   Form1: TForm1;
@@ -64,36 +61,17 @@ begin
   EditPort.Enabled := not FServer.Active;
 end;
 
-procedure WriteStr(line: string);
-var
-  f:TextFile;
-begin
-  try
-    AssignFile(f, 'log.txt');
-    Rewrite(f);
-    WriteLn(f, line);
-    CloseFile(f);
-  except
-    MessageDlg('Ошибка сохранения файла!',mtError,[mbOk],0);
-  end;
-end;
-
 procedure WidthCol;
 begin
-  try
-    Form1.DBgrid1.Columns[0].Width := 25;
-    Form1.DBgrid1.Columns[1].Width := 75;
-    Form1.DBgrid1.Columns[2].Width := 75;
-    Form1.DBgrid1.Columns[3].Width := 100;
-    Form1.DBgrid1.Columns[4].Width := 125;
-    Form1.DBgrid1.Columns[5].Width := 150;
-    Form1.DBgrid1.Columns[6].Width := 100;
-    Form1.DBgrid1.Columns[7].Width := 100;
-    Form1.DBgrid1.Columns[8].Width := 125;
-  except
-    on E : Exception do
-      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
-  end;
+ Form1.DBgrid1.Columns[0].Width := 25;
+ Form1.DBgrid1.Columns[1].Width := 75;
+ Form1.DBgrid1.Columns[2].Width := 75;
+ Form1.DBgrid1.Columns[3].Width := 100;
+ Form1.DBgrid1.Columns[4].Width := 125;
+ Form1.DBgrid1.Columns[5].Width := 150;
+ Form1.DBgrid1.Columns[6].Width := 100;
+ Form1.DBgrid1.Columns[7].Width := 100;
+ Form1.DBgrid1.Columns[8].Width := 125;
  end;
 
 Procedure TForm1.Refresh;
@@ -108,14 +86,9 @@ begin
                                 'Direction, '+
                                 'ErrorCode,  '+
                                 'DateTimeTransaction '+
-                                ' from PC1_log order by 1 desc';
-  try
-    ADOQuery1.Open;
-    WidthCol;
-  except
-    on E : Exception do
-      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
-  end;
+                                ' from PC2_log order by 1 desc';
+  ADOQuery1.Open;
+  WidthCol;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -126,19 +99,9 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 begin
   ADOQuery1.Close;
-  ADOQuery1.SQL.Text := 'delete * from PC1_Log';
-  try
-    ADOQuery1.ExecSQL;
-    Refresh;
-  except
-    on E : Exception do
-      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
-  end;
-end;
-
-procedure TForm1.Button3Click(Sender: TObject);
-begin
-  WriteStr('asdasdsa');
+  ADOQuery1.SQL.Text := 'delete * from PC2_Log';
+  ADOQuery1.ExecSQL;
+  Refresh;
 end;
 
 procedure TForm1.ButtonOpenBrowserClick(Sender: TObject);
@@ -154,12 +117,7 @@ end;
 
 procedure TForm1.ButtonStartClick(Sender: TObject);
 begin
-  try
-    StartServer;
-  except
-    on E : Exception do
-      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
-  end;
+  StartServer;
 end;
 
 procedure TerminateThreads;
@@ -197,7 +155,7 @@ function LogAction(aIDRequest: integer;
                    aDirection, aErrorCode: Integer;
                    aTypeRequest :String) : integer;
 begin
-  Form1.ADOQuery1.SQL.Text := 'insert into PC1_Log (IDRequest, '+
+  Form1.ADOQuery1.SQL.Text := 'insert into PC2_Log (IDRequest, '+
                                                    'IDTerminal, '+
                                                    'TextRequest, '+
                                                    'TextResponse, '+
@@ -233,5 +191,6 @@ begin
     Result := 0;
   end;
 end;
+
 
 end.

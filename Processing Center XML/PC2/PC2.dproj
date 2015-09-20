@@ -3,7 +3,7 @@
         <ProjectGuid>{A57CA057-ED20-4FC1-B9B5-4D69D3CAE7B0}</ProjectGuid>
         <ProjectVersion>15.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
-        <MainSource>PC1.dpr</MainSource>
+        <MainSource>PC2.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -40,7 +40,6 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <VCL_Custom_Styles>&quot;Silver|VCLSTYLE|$(PUBLIC)\Documents\RAD Studio\11.0\Styles\Silver.vsf&quot;</VCL_Custom_Styles>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <PostBuildEvent><![CDATA[if exist "$(BDS)\ObjRepos\en\dsrest\dsPostBuild.bat" ( call "$(BDS)\ObjRepos\en\dsrest\dsPostBuild.bat" "$(PROJECTDIR)" "$(OUTPUTDIR)" )
 $(PostBuildEvent)]]></PostBuildEvent>
@@ -88,24 +87,24 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="PC1_FormUnit.pas">
+        <DCCReference Include="PC2_FormUnit.pas">
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="PC1_ServerMethodsUnit.pas"/>
-        <DCCReference Include="PC1_ServerContainerUnit.pas">
+        <DCCReference Include="PC2_ServerMethodsUnit.pas"/>
+        <DCCReference Include="PC2_ServerContainerUnit.pas">
             <Form>ServerContainer1</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="PC1_WebModuleUnit.pas">
+        <DCCReference Include="PC2_WebModuleUnit.pas">
             <Form>WebModule1</Form>
             <FormType>dfm</FormType>
             <DesignClass>TWebModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="PC1_RequestXML.pas"/>
+        <DCCReference Include="PC2_RequestXML.pas"/>
         <DCCReference Include="..\..\XMLComponents\request100.pas"/>
-        <DCCReference Include="PC1_ResponseXML.pas"/>
+        <DCCReference Include="PC2_ResponseXML.pas"/>
         <DCCReference Include="..\..\XMLComponents\response100.pas"/>
         <DCCReference Include="..\..\XMLComponents\response198.pas"/>
         <DCCReference Include="..\..\XMLComponents\response199.pas"/>
@@ -192,13 +191,11 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <VersionInfoKeys Name="CFBundleDevelopmentRegion"/>
                 </VersionInfoKeys>
                 <Source>
-                    <Source Name="MainSource">PC1.dpr</Source>
+                    <Source Name="MainSource">PC2.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k180.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp180.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k180.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp180.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k190.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp190.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment/>
