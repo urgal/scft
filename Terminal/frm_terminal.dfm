@@ -169,13 +169,15 @@ object TerminalForm: TTerminalForm
     Enabled = False
     TabOrder = 11
   end
-  object Edit1: TEdit
+  object Memo1: TMemo
     Left = 8
-    Top = 105
-    Width = 121
-    Height = 21
+    Top = 288
+    Width = 433
+    Height = 89
+    Lines.Strings = (
+      'Memo1')
     TabOrder = 12
-    Text = 'Edit1'
+    Visible = False
   end
   object dsTermOpers: TDataSource
     Left = 384

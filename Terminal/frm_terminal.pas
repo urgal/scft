@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, DB, terminal_tools, Data.Win.ADODB, terminal_db,
-  IPPeerClient, REST.Client, REST.Types,
-  Data.Bind.Components, Data.Bind.ObjectScope;
+  IPPeerClient, REST.Client, REST.Types, Soap.EncdDecd,
+  Data.Bind.ObjectScope, Data.Bind.Components;
 
 type
   TTerminalForm = class(TForm)
@@ -33,7 +33,7 @@ type
     edCurrency: TEdit;
     lbPinBlock: TLabel;
     edPinBlock: TEdit;
-    Edit1: TEdit;
+    Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
@@ -105,12 +105,17 @@ begin
       ShowMessage(E.Message);
     end;
   end;}
-  vXML := xmlrequest.CreateXMLFile(edTermID.Text, edShiftID.Text,
+  vxml := '';
+    vXML := xmlrequest.CreateXMLFile(edTermID.Text, edShiftID.Text,
             edCurrency.Text, inttostr(GenerateOperationType), edPan.Text,
             edPinBlock.Text, edAmount.Text);
-  rstClient.BaseURL := 'http://10.168.1.236:8081/rest/request100' +'?' + vXML;
-  Edit1.Text := vXML;
-  Edit1.Visible := false;
+  vXML := '?request=' + EncodeString(vXML);
+  vxml := UTF8Encode(vxml);
+  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll, rfIgnoreCase]);
+  rstClient.BaseURL := 'http://10.168.1.236:8081/rest/request100' + vXML;
+
+  //Memo1.Text := vXML;
+  //exit;
 //  rstReq.AddBody(vXML, ctAPPLICATION_XML);
 //  rstReq.Timeout := 5000;
   try //отправка сообщения
