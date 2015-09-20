@@ -117,8 +117,6 @@ object Form1: TForm1
     Connection = ADOConnection1
     CursorType = ctStatic
     Parameters = <>
-    SQL.Strings = (
-      'select * from PC1_log')
     Left = 480
     Top = 8
   end
