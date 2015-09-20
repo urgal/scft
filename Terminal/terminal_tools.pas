@@ -142,7 +142,7 @@ begin
     try
       query.Connection := GetADOConnection;
       query.SQL.Text :=
-        'update tbl_shift set time_open=:CloseTime where id = :ShiftID;';
+        'update tbl_shift set time_close=:CloseTime where id = :ShiftID;';
       query.Parameters.ParseSQL(query.SQL.Text, true);
       query.Parameters.ParamValues['ShiftID'] := aShiftID;
       query.Parameters.ParamValues['CloseTime'] := now;
@@ -167,8 +167,8 @@ begin
     try
       query.Connection := GetADOConnection;
       query.SQL.Text :=
-        'insert into tbl_operation (id_terminal, id_shift, type, pan, currency, sum, time) ' +
-        'values (:terminalID, :shiftID, :type, :pan, :currency, :sum, :time);';
+        'insert into tbl_operation (id_terminal, id_shift, oper_type, pan, oper_currency, oper_time, oper_sum) ' +
+        'values (:terminalID, :shiftID, :type, :pan, :currency, :time, :sum);';
       query.Parameters.ParseSQL(query.SQL.Text, true);
       query.Parameters.ParamValues['terminalID'] := aFields.terminal;
       query.Parameters.ParamValues['shiftID'] := aFields.shift;
