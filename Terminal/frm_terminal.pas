@@ -178,12 +178,12 @@ begin
     on E:Exception do
       raise Exception.Create(E.Message);
   end;
-  if Assigned(rstResp.JSONValue) then
+  {if Assigned(rstResp.JSONValue) then
   begin //обработка ответа
     showmessage(rstResp.Content); // заглушка
     //rstResp.GetSimpleValue('result', vResult);
 //  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll]);
-  end;
+  end;}
 end;
 
 procedure TTerminalForm.FormCreate(Sender: TObject);
