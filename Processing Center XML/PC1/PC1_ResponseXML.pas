@@ -2,7 +2,8 @@ unit PC1_ResponseXML;
 
 interface
 
-uses PC1_FormUnit, System.SysUtils, System.Classes, Xml.XMLDoc, response100;
+uses PC1_FormUnit, System.SysUtils, System.StrUtils, System.Classes, Xml.XMLDoc,
+     response100, Soap.EncdDecd;
 
 function GetResponse100(LogId: integer): string;
 function GetResponse198(LogId: integer): string;
@@ -23,7 +24,7 @@ begin
     vResponse100.Body.ResponseCode:= '0AA';
     vXML:= vResponse100.XML;
     LogId := LogAction(1,'1','1','1','',1,1,'1');
-    Result := vXML;
+    Result := EncodeString(vXML);
   finally
 
  end;
@@ -42,7 +43,7 @@ begin
     vResponse100.Body.ResponseCode:= '0AA';
     vXML:= vResponse100.XML;
     LogId := LogAction(1,'1','1','1','',1,1,'1');
-    Result := vXML;
+    Result := EncodeString(vXML);
   finally
 
  end;
@@ -61,7 +62,7 @@ begin
     vResponse100.Body.ResponseCode:= '0AA';
     vXML:= vResponse100.XML;
     LogId := LogAction(1,'1','1','1','',1,1,'1');
-    Result := vXML;
+    Result := EncodeString(vXML);
   finally
 
  end;

@@ -38,8 +38,7 @@ var
 begin
   vLogId := ParseXML100(aXML);
   GetResponse100(vLogId);
-  Result := StringReplace(GetResponse100(vLogId),'"','/"',
-                          [rfReplaceAll, rfIgnoreCase])
+  Result := GetResponse100(vLogId);
 //result := 'test';
 end;
 
