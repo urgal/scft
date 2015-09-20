@@ -114,7 +114,6 @@ begin
             edPinBlock.Text, edAmount.Text);
   vXML := '?request=' + EncodeString(vXML);
   vxml := UTF8Encode(vxml);
-  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll]);
   rstClient.BaseURL := 'http://10.168.1.236:8081/rest/request100' + vXML;
 
   try //отправка сообщения
