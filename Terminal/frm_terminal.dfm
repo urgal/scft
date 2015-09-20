@@ -79,6 +79,7 @@ object TerminalForm: TTerminalForm
     Caption = #1040#1074#1090#1086'-'#1088#1077#1078#1080#1084
     Enabled = False
     TabOrder = 1
+    OnClick = btPacketModeClick
   end
   object edPan: TEdit
     Left = 278

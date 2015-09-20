@@ -38,6 +38,8 @@ type
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
     procedure btSendClick(Sender: TObject);
+    procedure btPacketModeClick(Sender: TObject);
+    procedure SendOperationData(const aFields : TOperationFields);
   private
     FCurrentTerminalID : integer;
     FCurrentShiftID : integer;
@@ -96,9 +98,38 @@ begin
   end;
 end;
 
-procedure TTerminalForm.btSendClick(Sender: TObject);
+procedure TTerminalForm.btPacketModeClick(Sender: TObject);
 var
+  i : integer;
   vResult, vXML : string;
+  vFields : TOperationFields;
+begin
+  for i := 1 to random(5) + 1 do
+  begin
+    GenerateOperationFields(FCurrentTerminalID, FCurrentShiftID, vFields);
+    try
+      LogOperationFields(vFields);
+    except
+      on E : Exception do
+      begin
+        ShowMessage(E.Message);
+      end;
+    end;
+    OperQuery.Active := false;
+    OperQuery.Active := true;
+    try
+      SendOperationData(vFields);
+    except
+      on E : Exception do
+      begin
+        ShowMessage(E.Message);
+      end;
+    end;
+  end;
+
+end;
+
+procedure TTerminalForm.btSendClick(Sender: TObject);
 begin
   try
     LogOperationFields(FGenerateFields);
@@ -109,28 +140,39 @@ begin
   end;
   OperQuery.Active := false;
   OperQuery.Active := true;
-  vxml := '';
-  edPinBlock.Text := IntToHex(FGenerateFields.pin, 0);
-    vXML := xmlrequest.CreateXMLFile(FGenerateFields.id, edTermID.Text, edShiftID.Text,
-            edCurrency.Text, inttostr(GenerateOperationType), edPan.Text,
-            edPinBlock.Text, edAmount.Text);
+  try
+    SendOperationData(FGenerateFields);
+  except
+    on E : Exception do
+    begin
+      ShowMessage(E.Message);
+    end;
+  end;
+end;
+
+procedure TTerminalForm.SendOperationData(const aFields : TOperationFields);
+var
+  vResult, vXML : string;
+begin
+  vXML := '';
+  vXML := xmlrequest.CreateXMLFile(aFields);
   vXML := '?request=' + EncodeString(vXML);
   vxml := UTF8Encode(vxml);
   rstClient.BaseURL := 'http://10.168.1.236:8081/rest/request100' + vXML;
 
   try //отправка сообщения
+    rstReq.Timeout := 60000;
     rstReq.Method := rmPost;
     rstReq.Execute;
   except
     on E:Exception do
-      ShowMessage(E.Message);
+      raise Exception.Create(E.Message);
   end;
   if Assigned(rstResp.JSONValue) then
   begin //обработка ответа
     showmessage(rstResp.Content); // заглушка
     //rstResp.GetSimpleValue('result', vResult);
 //  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll]);
-//  rstReq.Timeout := 5000;
   end;
 end;
 
