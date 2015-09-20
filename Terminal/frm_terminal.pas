@@ -82,6 +82,7 @@ begin
       btOpenShift.Caption := 'Открыть смену';
       edShiftID.Text := '';
       CloseTerminalShift(FCurrentShiftID);
+      OperQuery.Active := false;
     end;
     1 : begin
       btOpenShift.Caption := 'Закрыть смену';
@@ -94,6 +95,9 @@ begin
       end;
       edShiftID.Text := IntToStr(FCurrentShiftID);
       OperQuery.Parameters.ParamValues['shiftID'] := FCurrentShiftID;
+      OperQuery.Active := false;
+      OperQuery.Active := true;
+      OperQuery.Last;
     end;
   end;
 end;
@@ -117,6 +121,7 @@ begin
     end;
     OperQuery.Active := false;
     OperQuery.Active := true;
+    OperQuery.Last;
     try
       SendOperationData(vFields);
     except
@@ -197,7 +202,7 @@ begin
   OperQuery.Connection := GetADOConnection;
   OperQuery.Parameters.ParseSQL(OperQuery.SQL.Text, true);
   OperQuery.Parameters.ParamValues['shiftID'] := FCurrentShiftID;
-  OperQuery.Active := true;
+  //OperQuery.Active := true;
 end;
 
 end.
