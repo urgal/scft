@@ -17,7 +17,9 @@ uses
   response100 in '..\..\XMLComponents\response100.pas',
   response198 in '..\..\XMLComponents\response198.pas',
   response199 in '..\..\XMLComponents\response199.pas',
-  request198 in '..\..\XMLComponents\request198.pas';
+  request198 in '..\..\XMLComponents\request198.pas',
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 
@@ -25,6 +27,7 @@ begin
   if WebRequestHandler <> nil then
     WebRequestHandler.WebModuleClass := WebModuleClass;
   Application.Initialize;
+  TStyleManager.TrySetStyle('Silver');
   Application.CreateForm(TForm1, Form1);
   Application.Run;
 end.

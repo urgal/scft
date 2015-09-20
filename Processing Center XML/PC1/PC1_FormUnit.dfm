@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 271
   Top = 114
-  Caption = 'Form1'
+  Caption = 'Processing Center (one)'
   ClientHeight = 390
   ClientWidth = 766
   Color = clBtnFace
@@ -20,16 +20,16 @@ object Form1: TForm1
   object Label1: TLabel
     Left = 24
     Top = 48
-    Width = 20
+    Width = 25
     Height = 13
-    Caption = 'Port'
+    Caption = #1055#1086#1088#1090
   end
   object ButtonStart: TButton
     Left = 24
     Top = 8
     Width = 75
     Height = 25
-    Caption = 'Start'
+    Caption = #1057#1090#1072#1088#1090
     TabOrder = 0
     OnClick = ButtonStartClick
   end
@@ -38,7 +38,7 @@ object Form1: TForm1
     Top = 8
     Width = 75
     Height = 25
-    Caption = 'Stop'
+    Caption = #1057#1090#1086#1087
     TabOrder = 1
     OnClick = ButtonStopClick
   end
@@ -55,7 +55,7 @@ object Form1: TForm1
     Top = 112
     Width = 107
     Height = 25
-    Caption = 'Open Browser'
+    Caption = #1054#1090#1082#1088#1099#1090#1100' '#1073#1088#1072#1091#1079#1077#1088
     TabOrder = 3
     OnClick = ButtonOpenBrowserClick
   end
@@ -79,7 +79,7 @@ object Form1: TForm1
     Top = 112
     Width = 75
     Height = 25
-    Caption = 'Refresh'
+    Caption = #1054#1073#1085#1086#1074#1080#1090#1100
     TabOrder = 5
     OnClick = Button1Click
   end
@@ -88,9 +88,18 @@ object Form1: TForm1
     Top = 112
     Width = 75
     Height = 25
-    Caption = 'Clear'
+    Caption = #1054#1095#1080#1089#1090#1080#1090#1100
     TabOrder = 6
     OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 560
+    Top = 64
+    Width = 75
+    Height = 25
+    Caption = 'Button3'
+    TabOrder = 7
+    OnClick = Button3Click
   end
   object ApplicationEvents1: TApplicationEvents
     OnIdle = ApplicationEvents1Idle

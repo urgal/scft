@@ -47,7 +47,8 @@ begin
     vResponse100.Poslun  := vSQLq.FieldByName('IDTerminal').Value;
       //Result := Form1.ADOQuery1.Fields[0].AsInteger;
     except
-      //Result := 0;
+      on E : Exception do
+        WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
     end;
 
     vXML:= vResponse100.XML;
@@ -60,9 +61,10 @@ begin
                       0,
                       vResponse100.Type_);
     Result := EncodeString(vXML);
-  finally
-
- end;
+  except
+    on E : Exception do
+      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
+  end;
 end;
 
 function GetResponse198(LogId: integer): string;
@@ -85,9 +87,10 @@ begin
                       0,
                       vResponse198.Type_);
     Result := EncodeString(vXML);
-  finally
-
- end;
+  except
+    on E : Exception do
+      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
+  end;
 end;
 
 function GetResponse199(LogId: integer): string;
@@ -110,9 +113,10 @@ begin
                       0,
                       vResponse199.Type_);
     Result := EncodeString(vXML);
-  finally
-
- end;
+  except
+    on E : Exception do
+      WriteStr(E.ClassName+' поднята ошибка, с сообщением : '+E.Message);
+  end;
 end;
 
 
