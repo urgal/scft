@@ -38,7 +38,6 @@ type
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
     procedure btSendClick(Sender: TObject);
-    procedure ViewDBChanges(aOperId : integer);
   private
     FCurrentTerminalID : integer;
     FCurrentShiftID : integer;
@@ -106,21 +105,15 @@ begin
       ShowMessage(E.Message);
     end;
   end;
-//  ViewDBChanges(FGenerateFields.id);
   vxml := '';
+  edPinBlock.Text := 'FFFAC56';
     vXML := xmlrequest.CreateXMLFile(FGenerateFields.id, edTermID.Text, edShiftID.Text,
             edCurrency.Text, inttostr(GenerateOperationType), edPan.Text,
             edPinBlock.Text, edAmount.Text);
   vXML := '?request=' + EncodeString(vXML);
-  //vxml := UTF8Encode(vxml);
-  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll]);
-  Memo1.Text := vXml;
+  vxml := UTF8Encode(vxml);
   rstClient.BaseURL := 'http://10.168.1.236:8081/rest/request100' + vXML;
 
-  //Memo1.Text := vXML;
-  //exit;
-//  rstReq.AddBody(vXML, ctAPPLICATION_XML);
-//  rstReq.Timeout := 5000;
   try //отправка сообщения
     rstReq.Method := rmPost;
     rstReq.Execute;
@@ -130,9 +123,10 @@ begin
   end;
   if Assigned(rstResp.JSONValue) then
   begin //обработка ответа
-
+    showmessage(rstResp.Content); // заглушка
     //rstResp.GetSimpleValue('result', vResult);
-    Memo1.Text := rstResp.Content;
+//  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll]);
+//  rstReq.Timeout := 5000;
   end;
 end;
 
@@ -154,21 +148,6 @@ begin
   edTermID.Text := IntToStr(FCurrentTerminalID);
   list := cbOperType.Items;
   InitOperationList(list);
-end;
-
-procedure TTerminalForm.ViewDBChanges(aOperId : integer);
-var
-  vQuery : TADOQuery;
-begin
-  vQuery := TADOQuery.Create(nil);
-  vQuery.Connection := GetADOConnection;
-  vQuery.SQL.Text := 'select id_terminal, id_shift, oper_type, pan, ' +
-                     '       oper_currency, oper_time, oper_sum ' +
-                     '  from tbl_operation ' +
-                     ' where id = :id';
-  vQuery.Parameters.ParamValues['id'] := aOperID;
-  dsTermOpers.DataSet := vQuery;
-  vQuery.ExecSQL;
 end;
 
 end.
