@@ -110,7 +110,7 @@ var
   vFields : TOperationFields;
 begin
   PacketProgress.Min := 0;
-  PacketProgress.Max := random(7) + 3;
+  PacketProgress.Max := random(3) + 3;
   PacketProgress.Position := 0;
   for i := 1 to PacketProgress.Max do
   begin
@@ -174,6 +174,7 @@ begin
     rstReq.Timeout := 60000;
     rstReq.Method := rmPost;
     rstReq.Execute;
+    sleep(500);
   except
     on E:Exception do
       raise Exception.Create(E.Message);
