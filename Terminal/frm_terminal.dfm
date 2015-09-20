@@ -146,6 +146,7 @@ object TerminalForm: TTerminalForm
     Top = 264
     Width = 439
     Height = 149
+    DataSource = dsTermOpers
     TabOrder = 9
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -170,14 +171,13 @@ object TerminalForm: TTerminalForm
     TabOrder = 11
   end
   object Memo1: TMemo
-    Left = 8
+    Left = 24
     Top = 288
-    Width = 433
+    Width = 393
     Height = 89
     Lines.Strings = (
       'Memo1')
     TabOrder = 12
-    Visible = False
   end
   object dsTermOpers: TDataSource
     Left = 384

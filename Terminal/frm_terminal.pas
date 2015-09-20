@@ -33,11 +33,12 @@ type
     edCurrency: TEdit;
     lbPinBlock: TLabel;
     edPinBlock: TEdit;
-    OperDataSet: TADODataSet;
+    Memo1: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
     procedure btSendClick(Sender: TObject);
+    procedure ViewDBChanges(aOperId : integer);
   private
     FCurrentTerminalID : integer;
     FCurrentShiftID : integer;
@@ -105,13 +106,15 @@ begin
       ShowMessage(E.Message);
     end;
   end;
+//  ViewDBChanges(FGenerateFields.id);
   vxml := '';
-    vXML := xmlrequest.CreateXMLFile(edTermID.Text, edShiftID.Text,
+    vXML := xmlrequest.CreateXMLFile(FGenerateFields.id, edTermID.Text, edShiftID.Text,
             edCurrency.Text, inttostr(GenerateOperationType), edPan.Text,
             edPinBlock.Text, edAmount.Text);
   vXML := '?request=' + EncodeString(vXML);
-  vxml := UTF8Encode(vxml);
-  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll, rfIgnoreCase]);
+  //vxml := UTF8Encode(vxml);
+  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll]);
+  Memo1.Text := vXml;
   rstClient.BaseURL := 'http://10.168.1.236:8081/rest/request100' + vXML;
 
   //Memo1.Text := vXML;
@@ -129,7 +132,7 @@ begin
   begin //обработка ответа
 
     //rstResp.GetSimpleValue('result', vResult);
-    ShowMessage(rstresp.Content);
+    Memo1.Text := rstResp.Content;
   end;
 end;
 
@@ -147,11 +150,25 @@ begin
       Application.Terminate;
     end;
   end;
-  OperDataSet.Connection := GetADOConnection;
   FCurrentTerminalID := GenerateTerminalID;
   edTermID.Text := IntToStr(FCurrentTerminalID);
   list := cbOperType.Items;
   InitOperationList(list);
+end;
+
+procedure TTerminalForm.ViewDBChanges(aOperId : integer);
+var
+  vQuery : TADOQuery;
+begin
+  vQuery := TADOQuery.Create(nil);
+  vQuery.Connection := GetADOConnection;
+  vQuery.SQL.Text := 'select id_terminal, id_shift, oper_type, pan, ' +
+                     '       oper_currency, oper_time, oper_sum ' +
+                     '  from tbl_operation ' +
+                     ' where id = :id';
+  vQuery.Parameters.ParamValues['id'] := aOperID;
+  dsTermOpers.DataSet := vQuery;
+  vQuery.ExecSQL;
 end;
 
 end.
