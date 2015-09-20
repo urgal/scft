@@ -111,6 +111,7 @@ var
 begin
   PacketProgress.Min := 0;
   PacketProgress.Max := random(12) + 3;
+  PacketProgress.Position := 0;
   for i := 1 to PacketProgress.Max do
   begin
     PacketProgress.Position := i;
@@ -120,7 +121,7 @@ begin
     except
       on E : Exception do
       begin
-        //ShowMessage(E.Message);
+        continue;
       end;
     end;
     OperQuery.Active := false;
@@ -132,7 +133,7 @@ begin
     except
       on E : Exception do
       begin
-        //ShowMessage(E.Message);
+        continue;
       end;
     end;
   end;
