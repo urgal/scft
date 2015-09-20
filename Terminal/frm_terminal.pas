@@ -66,6 +66,7 @@ begin
   edAmount.Text := FloatToStr(FGenerateFields.sum);
   edCurrency.Text := IntToStr(FGenerateFields.currency);
   edPan.Text := IntToStr(FGenerateFields.pan);
+  edPinBlock.Text := IntToHex(FGenerateFields.pin, 0);
 end;
 
 procedure TTerminalForm.btOpenShiftClick(Sender: TObject);
@@ -90,6 +91,7 @@ begin
         end;
       end;
       edShiftID.Text := IntToStr(FCurrentShiftID);
+      OperQuery.Parameters.ParamValues['shiftID'] := FCurrentShiftID;
     end;
   end;
 end;
@@ -108,7 +110,7 @@ begin
   OperQuery.Active := false;
   OperQuery.Active := true;
   vxml := '';
-  edPinBlock.Text := 'FFFAC56';
+  edPinBlock.Text := IntToHex(FGenerateFields.pin, 0);
     vXML := xmlrequest.CreateXMLFile(FGenerateFields.id, edTermID.Text, edShiftID.Text,
             edCurrency.Text, inttostr(GenerateOperationType), edPan.Text,
             edPinBlock.Text, edAmount.Text);
@@ -151,6 +153,8 @@ begin
   list := cbOperType.Items;
   InitOperationList(list);
   OperQuery.Connection := GetADOConnection;
+  OperQuery.Parameters.ParseSQL(OperQuery.SQL.Text, true);
+  OperQuery.Parameters.ParamValues['shiftID'] := FCurrentShiftID;
   OperQuery.Active := true;
 end;
 

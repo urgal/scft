@@ -12,6 +12,7 @@ TOperationFields = record
   shift : integer;
   operationType : integer;
   pan : integer;
+  pin : integer;
   currency : integer;
   sum : double;
 end;
@@ -21,6 +22,7 @@ function GenerateOperationType: integer;
 function GenerateOperationCardPAN: integer;
 function GenerateOperationCurrency: integer;
 function GenerateOperationSum(aCurrency: integer): double;
+function GenerateOperationCardPIN: integer;
 procedure GenerateOperationFields(aTerminalID, aShiftID: integer; var aFields: TOperationFields);
 
 function OpenTerminalShift(aTerminalID: integer): integer;
@@ -89,6 +91,11 @@ begin
   end;
 end;
 
+function GenerateOperationCardPIN: integer;
+begin
+  Result := random(10000)+10000;
+end;
+
 procedure GenerateOperationFields(aTerminalID, aShiftID:integer; var aFields: TOperationFields);
 begin
   fillchar(aFields,sizeof(aFields),0);
@@ -102,6 +109,7 @@ begin
     end;
   end;
   aFields.pan := GenerateOperationCardPAN;
+  aFields.pin := GenerateOperationCardPIN;
 end;
 
 function OpenTerminalShift(aTerminalID: integer): integer;
