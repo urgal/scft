@@ -7,6 +7,7 @@ uses
 
 type
 TOperationFields = record
+  id : integer;
   terminal : integer;
   shift : integer;
   operationType : integer;
@@ -25,7 +26,7 @@ procedure GenerateOperationFields(aTerminalID, aShiftID: integer; var aFields: T
 function OpenTerminalShift(aTerminalID: integer): integer;
 procedure CloseTerminalShift(aShiftID: integer);
 
-procedure LogOperationFields(const aFields: TOperationFields);
+procedure LogOperationFields(var aFields: TOperationFields);
 
 procedure InitOperationList(var aList: TStrings);
 
@@ -158,7 +159,7 @@ begin
   end;
 end;
 
-procedure LogOperationFields(const aFields: TOperationFields);
+procedure LogOperationFields(var aFields: TOperationFields);
 var
   query : TADOQuery;
 begin
@@ -178,6 +179,10 @@ begin
       query.Parameters.ParamValues['sum'] := aFields.sum;
       query.Parameters.ParamValues['time'] := now;
       query.ExecSQL;
+      query.Close;
+      query.SQL.Text := 'select top 1 id from tbl_operation order by id desc';
+      query.Open;
+      aFields.id := query.FieldByName('id').AsInteger;
     except
       on E: Exception do
       begin

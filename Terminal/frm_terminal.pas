@@ -33,7 +33,7 @@ type
     edCurrency: TEdit;
     lbPinBlock: TLabel;
     edPinBlock: TEdit;
-    Memo1: TMemo;
+    OperDataSet: TADODataSet;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
@@ -98,13 +98,13 @@ procedure TTerminalForm.btSendClick(Sender: TObject);
 var
   vResult, vXML : string;
 begin
-  {try
+  try
     LogOperationFields(FGenerateFields);
   except
     on E : Exception do begin
       ShowMessage(E.Message);
     end;
-  end;}
+  end;
   vxml := '';
     vXML := xmlrequest.CreateXMLFile(edTermID.Text, edShiftID.Text,
             edCurrency.Text, inttostr(GenerateOperationType), edPan.Text,
@@ -147,6 +147,7 @@ begin
       Application.Terminate;
     end;
   end;
+  OperDataSet.Connection := GetADOConnection;
   FCurrentTerminalID := GenerateTerminalID;
   edTermID.Text := IntToStr(FCurrentTerminalID);
   list := cbOperType.Items;
