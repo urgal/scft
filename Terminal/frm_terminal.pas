@@ -33,7 +33,7 @@ type
     edCurrency: TEdit;
     lbPinBlock: TLabel;
     edPinBlock: TEdit;
-    Memo1: TMemo;
+    OperQuery: TADOQuery;
     procedure FormCreate(Sender: TObject);
     procedure btOpenShiftClick(Sender: TObject);
     procedure btGenerateClick(Sender: TObject);
@@ -105,6 +105,9 @@ begin
       ShowMessage(E.Message);
     end;
   end;
+  OperQuery.Active := false;
+  OperQuery.Active := true;
+//  ViewDBChanges(FGenerateFields.id);
   vxml := '';
   edPinBlock.Text := 'FFFAC56';
     vXML := xmlrequest.CreateXMLFile(FGenerateFields.id, edTermID.Text, edShiftID.Text,
@@ -112,6 +115,9 @@ begin
             edPinBlock.Text, edAmount.Text);
   vXML := '?request=' + EncodeString(vXML);
   vxml := UTF8Encode(vxml);
+  //vxml := UTF8Encode(vxml);
+  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll]);
+  //Memo1.Text := vXml;
   rstClient.BaseURL := 'http://10.168.1.236:8081/rest/request100' + vXML;
 
   try //отправка сообщения
@@ -127,6 +133,7 @@ begin
     //rstResp.GetSimpleValue('result', vResult);
 //  vxml := StringReplace(vxml, '+', '%2b', [rfReplaceAll]);
 //  rstReq.Timeout := 5000;
+    //Memo1.Text := rstResp.Content;
   end;
 end;
 
@@ -148,6 +155,8 @@ begin
   edTermID.Text := IntToStr(FCurrentTerminalID);
   list := cbOperType.Items;
   InitOperationList(list);
+  OperQuery.Connection := GetADOConnection;
+  OperQuery.Active := true;
 end;
 
 end.

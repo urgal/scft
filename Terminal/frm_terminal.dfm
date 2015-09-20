@@ -170,16 +170,8 @@ object TerminalForm: TTerminalForm
     Enabled = False
     TabOrder = 11
   end
-  object Memo1: TMemo
-    Left = 24
-    Top = 288
-    Width = 393
-    Height = 89
-    Lines.Strings = (
-      'Memo1')
-    TabOrder = 12
-  end
   object dsTermOpers: TDataSource
+    DataSet = OperQuery
     Left = 384
     Top = 272
   end
@@ -200,5 +192,13 @@ object TerminalForm: TTerminalForm
   object rstResp: TRESTResponse
     Left = 384
     Top = 120
+  end
+  object OperQuery: TADOQuery
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from tbl_operation')
+    Left = 296
+    Top = 304
   end
 end
