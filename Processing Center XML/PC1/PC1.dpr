@@ -14,7 +14,9 @@ uses
   PC1_Request in 'PC1_Request.pas',
   request100 in '..\..\XMLComponents\request100.pas',
   PC1_ResponseXML in 'PC1_ResponseXML.pas',
-  response100 in '..\..\XMLComponents\response100.pas';
+  response100 in '..\..\XMLComponents\response100.pas',
+  response198 in '..\..\XMLComponents\response198.pas',
+  response199 in '..\..\XMLComponents\response199.pas';
 
 {$R *.res}
 

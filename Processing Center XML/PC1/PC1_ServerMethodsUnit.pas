@@ -3,7 +3,8 @@ unit PC1_ServerMethodsUnit;
 interface
 
 uses System.SysUtils, System.Classes, Datasnap.DSServer, Datasnap.DSAuth,
-     Xml.xmldom, Xml.XMLIntf, Xml.Win.msxmldom, Xml.XMLDoc, PC1_Request, PC1_ResponseXML;
+     Xml.xmldom, Xml.XMLIntf, Xml.Win.msxmldom, Xml.XMLDoc, PC1_Request, PC1_ResponseXML,
+     Soap.EncdDecd;
 
 type
 {$METHODINFO ON}
@@ -37,9 +38,7 @@ var
   vLogId : integer;
 begin
   vLogId := ParseXML100(aXML);
-  GetResponse100(vLogId);
   Result := GetResponse100(vLogId);
-//result := 'test';
 end;
 
 function TServerMethods1.EchoString(Value: string): string;
@@ -49,7 +48,7 @@ end;
 
 function TServerMethods1.ReverseString(Value: string): string;
 begin
-  LogAction(1,'1','1','1','',1,1,'1');
+  //LogAction(1,'1','1','1','',1,1,'1');
   Result := System.StrUtils.ReverseString(Value);
 end;
 end.

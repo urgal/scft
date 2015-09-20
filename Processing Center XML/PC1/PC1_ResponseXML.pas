@@ -19,8 +19,11 @@ var
   vSQLq: TADOQuery;
 begin
   vResponse100:= Response100.NewResponse;
+
   try
+
     vSQLq := TADOQuery.Create(nil);
+    vSQLq.Connection := Form1.ADOConnection1;
     vSQLq.SQL.Text:= 'select ID, '+
                                 'IDRequest, '+
                                 'TypeRequest, '+
@@ -30,9 +33,9 @@ begin
                                 'Direction, '+
                                 'ErrorCode,  '+
                                 'DateTimeTransaction '+
-                                ' from PC1_log where id=:ID order by 1 desc';
+                                ' from PC1_log where ID = '+IntToStr(LogId)+' order by 1 desc';
 
-    vSQLq.Parameters.ParamByName('ID').Value := LogId;
+    //vSQLq.Parameters.Items[1].Value := LogId;
 
     try
       vSQLq.Open;

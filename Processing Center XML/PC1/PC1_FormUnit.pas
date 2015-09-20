@@ -61,6 +61,19 @@ begin
   EditPort.Enabled := not FServer.Active;
 end;
 
+procedure WidthCol;
+begin
+ Form1.DBgrid1.Columns[0].Width := 25;
+ Form1.DBgrid1.Columns[1].Width := 75;
+ Form1.DBgrid1.Columns[2].Width := 75;
+ Form1.DBgrid1.Columns[3].Width := 100;
+ Form1.DBgrid1.Columns[4].Width := 125;
+ Form1.DBgrid1.Columns[5].Width := 150;
+ Form1.DBgrid1.Columns[6].Width := 100;
+ Form1.DBgrid1.Columns[7].Width := 100;
+ Form1.DBgrid1.Columns[8].Width := 125;
+ end;
+
 Procedure TForm1.Refresh;
 begin
   ADOQuery1.Close;
@@ -68,13 +81,14 @@ begin
                                 'IDRequest, '+
                                 'TypeRequest, '+
                                 'IDTerminal, '+
-                                'Left(TextRequest,200) as TextRequest, '+
-                                'Left(TextResponse,200) as TextResponse, '+
+                                'Left(TextRequest,25) as TextRequest, '+
+                                'Left(TextResponse,25) as TextResponse, '+
                                 'Direction, '+
                                 'ErrorCode,  '+
                                 'DateTimeTransaction '+
                                 ' from PC1_log order by 1 desc';
   ADOQuery1.Open;
+  WidthCol;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -172,7 +186,7 @@ begin
   try
     Form1.ADOQuery1.ExecSQL;
     Form1.Refresh;
-    Result := Form1.ADOQuery1.Fields[0].AsInteger;
+    Result := Form1.ADOQuery1.FieldByName('ID').AsInteger;
   except
     Result := 0;
   end;
