@@ -22,8 +22,6 @@ type
     DBGrid1: TDBGrid;
     Button1: TButton;
     Button2: TButton;
-    Memo1: TMemo;
-    Button3: TButton;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
     procedure ButtonStartClick(Sender: TObject);
@@ -31,7 +29,6 @@ type
     procedure ButtonOpenBrowserClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
   private
     FServer: TIdHTTPWebBrokerBridge;
     procedure StartServer;
@@ -91,11 +88,6 @@ begin
   ADOQuery1.SQL.Text := 'delete * from PC1_Log';
   ADOQuery1.ExecSQL;
   Refresh;
-end;
-
-procedure TForm1.Button3Click(Sender: TObject);
-begin
-Memo1.Text := AnsiString(DecodeBase64(AnsiString(Memo1.Text)));
 end;
 
 procedure TForm1.ButtonOpenBrowserClick(Sender: TObject);

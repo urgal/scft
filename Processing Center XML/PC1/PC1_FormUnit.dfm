@@ -92,22 +92,6 @@ object Form1: TForm1
     TabOrder = 6
     OnClick = Button2Click
   end
-  object Memo1: TMemo
-    Left = 200
-    Top = 8
-    Width = 529
-    Height = 89
-    TabOrder = 7
-  end
-  object Button3: TButton
-    Left = 552
-    Top = 104
-    Width = 75
-    Height = 25
-    Caption = 'Button3'
-    TabOrder = 8
-    OnClick = Button3Click
-  end
   object ApplicationEvents1: TApplicationEvents
     OnIdle = ApplicationEvents1Idle
     Left = 288
